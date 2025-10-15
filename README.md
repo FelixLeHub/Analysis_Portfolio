@@ -102,7 +102,7 @@ I enjoy solving problems with data, whether it's optimizing operations, identify
 
 **Description:** The project consists of 3 CSV files that showcase the bike rental store's revenue for the 1st and 2nd years, as well as the cost for operating the service. Using SQL, the 3 files were joined together into a single table, but only with the necessary columns needed to create the revenue dashboard. The table is then imported in Power BI for data visualization purposes.
 
-**Objective:** Create a visualization dashboard to understand the sales revenue of he bike rental service
+**Objective:** Create a visualization dashboard to understand the sales revenue of the bike rental service
 - Can the service increase its service pricing?
 
 **Results:** 
@@ -142,11 +142,11 @@ your pricing strategy without committing fully to a price that might turn out to
 - [projects.csv](projects.csv)
 - [upcoming_projects.csv](upcoming_projects.csv)
 
-**Description:** This project focuses on creating visual dashboards for analysis. It requires organizing and combining the 5 CSV files into one structured table accessible for reporting and data visualization. The goal of the dashboard i to help manage the workforce, to better understand the financial risks of each project, and to monitor the project health more effectively.
+**Description:** This project focuses on creating visual dashboards for analysis. It requires organizing and combining the 5 CSV files into one structured table accessible for reporting and data visualization. The goal of the dashboard I to help manage the workforce, to better understand the financial risks of each project, and to monitor the project health more effectively.
 **Note:** The department budgets are set at 2-year intervals.
 
 **Objective:** 
-- Create a visualization dashboard to understand the sales revenue of the bike rental service
+- Create a visualization dashboard to have an overview of all the business's projects
 - Identify departments and projects in the red. Understand which departments or projects are over budget or underperforming.
 - Can a year's budget cover the project expense?
 

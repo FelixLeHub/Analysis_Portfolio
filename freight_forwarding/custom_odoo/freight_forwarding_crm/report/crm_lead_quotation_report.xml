@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Paper Format: no header/footer space -->
+    <record id="paperformat_quotation" model="report.paperformat">
+        <field name="name">Freight_Forwarding Quotation</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="disable_shrinking" eval="True"/>
+    </record>
+
+    <!-- Report Action -->
+    <record id="action_report_crm_lead_quotation" model="ir.actions.report">
+        <field name="name">Freight Quotation</field>
+        <field name="model">crm.lead.quotation</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">freight_forwarding_crm.report_crm_lead_quotation_document</field>
+        <field name="report_file">freight_forwarding_crm.report_crm_lead_quotation_document</field>
+        <field name="print_report_name">'Freight Quotation - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_crm_lead_quotation"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_quotation"/>
+    </record>
+
+    <!-- Email Template -->
+    <record id="email_template_crm_quotation" model="mail.template">
+        <field name="name">Freight Quotation</field>
+        <field name="model_id" ref="model_crm_lead_quotation"/>
+        <field name="subject">Freight Quotation {{ object.name }}</field>
+        <field name="body_html"><![CDATA[
+<p>Dear {{ object.partner_id.name or 'Customer' }},</p>
+<p>Please find attached our freight quotation <strong>{{ object.name }}</strong>.</p>
+<table style="border-collapse:collapse; width:100%; margin:12px 0;">
+    <tr>
+        <td style="padding:4px 8px; font-weight:bold;">Quotation No.</td>
+        <td style="padding:4px 8px;">{{ object.name }}</td>
+    </tr>
+    <tr>
+        <td style="padding:4px 8px; font-weight:bold;">Service Type</td>
+        <td style="padding:4px 8px;">{{ object.freight_service_type_id.name or '-' }}</td>
+    </tr>
+    <tr>
+        <td style="padding:4px 8px; font-weight:bold;">POL</td>
+        <td style="padding:4px 8px;">{{ object.freight_pol_id.name or '-' }}</td>
+    </tr>
+    <tr>
+        <td style="padding:4px 8px; font-weight:bold;">POD</td>
+        <td style="padding:4px 8px;">{{ object.freight_pod_id.name or '-' }}</td>
+    </tr>
+</table>
+<p>Please do not hesitate to contact us if you have any questions.</p>
+<p>Best regards,</p>
+        ]]></field>
+        <field name="report_template_ids" eval="[(4, ref('action_report_crm_lead_quotation'))]"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <!-- QWeb Report Template -->
+    <template id="report_crm_lead_quotation_document">
+        <t t-call="web.html_container">
+            <style>
+                .header { display: none !important; height: 0 !important; min-height: 0 !important; padding: 0 !important; margin: 0 !important; }
+                .header-spacer, .footer { display: none !important; height: 0 !important; }
+                @page { margin-top: 5mm; margin-bottom: 5mm; }
+                .article { margin-top: 0 !important; padding-top: 0 !important; }
+                .page h5, .page h6 { font-size: 11px !important; }
+                .page .table thead th { font-weight: bold !important; font-size: 10px; }
+            </style>
+            <t t-foreach="docs" t-as="o">
+                <div class="article" data-oe-model="crm.lead.quotation" t-att-data-oe-id="o.id" style="margin-top: 0; padding-top: 0;">
+                    <div class="page" style="font-size:10px; margin-top: 0; padding-top: 0;">
+
+                        <!-- ══ Company Banner ══ -->
+                        <div style="border-bottom: 3px solid #cc0000; padding-bottom: 12px; margin-bottom: 16px;">
+                            <!-- Logo -->
+                            <div style="text-align: center; margin-bottom: 14px;">
+                                <img src="/freight_forwarding_crm/static/img/logo2.png" style="max-height: 80px;" alt="Freight_Forwarding Logistics"/>
+                            </div>
+                            <!-- Office Addresses -->
+                            <table style="width: 100%; font-size: 9px; line-height: 1.4; color: #333; border: none;">
+                                <tr>
+                                    <td style="width: 33%; vertical-align: top; padding: 0 6px 0 0;">
+                                        <strong>Ho Chi Minh City Office</strong><br/>
+                                        Address: 5th Floor, Dinh Le Building, No.1 Dinh Le Street,
+                                        13th ward, Dist 4th, Ho Chi Minh City, Viet Nam.<br/>
+                                        Email: info@freight_forwarding.com.vn Tel: + 84-28 38 267 292  Fax: +84-28 39435532
+                                    </td>
+                                    <td style="width: 34%; vertical-align: top; text-align: center; padding: 0 3px;">
+                                        <strong>Da Nang City - Rep.Office</strong><br/>
+                                        Address: 606B Room, 6th Floor, One Opera Building,
+                                        115 Nguyen Van Linh Street, Hai Chau Dist, Da Nang City, Viet Nam.<br/>
+                                        Tel: + 84 - 0236 384 3399  -  Fax: + 84-8 39435532
+                                    </td>
+                                    <td style="width: 33%; vertical-align: top; text-align: right; padding: 0 0 0 6px;">
+                                        <strong>Ha Noi City - Rep.Office</strong><br/>
+                                        Address: Room 2B2, 2 Floor, Hoang Cau Building,
+                                        71 Hoang Cau Street, O Cho Dua Ward, Ha Noi City, Viet Nam<br/>
+                                        Tel: +84-24 32 17 17 10  Fax: +84 24 32 17 17 11
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- FCL Greeting Header -->
+                        <t t-if="o.freight_service_type == 'fcl'">
+                            <div class="mb-3 mt-2" style="text-align: center;">
+                                <h5 class="fw-bold">Quotation for FCL Shipment from <t t-esc="o.freight_pol_id.name or '.....'"/> To <t t-esc="o.freight_pod_id.name or '.....'"/></h5>
+                                <p>Thanks so much for your interested in our services. I would like to advise the seafreight
+                                from <strong><t t-esc="o.freight_pol_id.name or '.....'"/></strong> to <strong><t t-esc="o.freight_pod_id.name or '.....'"/></strong> as below:</p>
+                            </div>
+                        </t>
+
+
+                        <!-- Shipment Details | Client Details -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h6 class="fw-bold border-bottom pb-1 mb-2">Shipment Details</h6>
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tr>
+                                        <td class="fw-bold" style="width:40%">Quotation No.</td>
+                                        <td><t t-esc="o.name"/></td>
+                                    </tr>
+                                    <tr t-if="o.lead_id">
+                                        <td class="fw-bold">Lead ID</td>
+                                        <td><t t-esc="o.lead_id.id"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Incoterm</td>
+                                        <td><t t-if="o.freight_incoterm"><span t-field="o.freight_incoterm"/></t></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Service Type</td>
+                                        <td><t t-if="o.freight_direction_id"><span t-field="o.freight_direction_id"/></t><t t-if="o.freight_direction_id and o.freight_service_type_id"> </t><t t-if="o.freight_service_type_id"><span t-field="o.freight_service_type_id"/></t></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold"><t t-if="o.freight_service_type == 'air'">AOL</t><t t-else="">POL</t></td>
+                                        <td><t t-esc="o.freight_pol_id.name or ''"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold"><t t-if="o.freight_service_type == 'air'">AOD</t><t t-else="">POD</t></td>
+                                        <td><t t-esc="o.freight_pod_id.name or ''"/></td>
+                                    </tr>
+                                    <tr t-if="o.freight_service_type == 'air' and o.freight_carrier">
+                                        <td class="fw-bold">Carrier</td>
+                                        <td><t t-esc="o.freight_carrier"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">T/T (days)</td>
+                                        <td><t t-esc="o.freight_tt_days or ''"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold"><t t-if="o.freight_service_type == 'air'">Freq</t><t t-else="">Frequency</t></td>
+                                        <td><t t-esc="o.freight_frequency or ''"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="fw-bold border-bottom pb-1 mb-2">Cargo Details</h6>
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tr>
+                                        <td class="fw-bold" style="width:40%">Gross Weight (KGS)</td>
+                                        <td><t t-esc="'%.2f' % o.freight_weight" t-if="o.freight_weight"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Volume (CBM)</td>
+                                        <td><t t-esc="'%.3f' % o.freight_volume" t-if="o.freight_volume"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Pallets</td>
+                                        <td><t t-esc="o.freight_pallets or ''"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Cargo</td>
+                                        <td><t t-esc="o.freight_cargo or ''"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Dimension</td>
+                                        <td><t t-esc="o.freight_dimension or ''"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Commodity</td>
+                                        <td><t t-esc="o.freight_commodity or ''"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- LCL Weight Breakpoints -->
+
+                        <!-- ══ FCL Sections ══ -->
+                        <t t-if="o.freight_service_type == 'fcl'">
+
+                            <div class="row mt-3 mb-1">
+                                <div class="col-6"><h6 class="fw-bold mb-0">1. Ocean rate:</h6></div>
+                                <div class="col-6 text-end"><span class="fw-bold">Currency:</span> <t t-esc="o.currency_id.name"/></div>
+                            </div>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.ocean_rate_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">2. Local charge at <t t-esc="o.freight_pol_id.name or ''"/>:</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.local_charge_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">3. Exw Fee</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.exw_fee_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!-- ══ LCL Sections ══ -->
+                        <t t-if="o.freight_service_type == 'lcl'">
+
+                            <h6 class="fw-bold mt-3 mb-1">1. Rate for LCL shipment</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.lcl_rate_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">2. Ex-work cost at the port of loading</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.lcl_exw_fee_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">3. Local charge in <t t-esc="o.freight_pol_id.name or ''"/></h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.lcl_local_charge_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!-- ══ Air Sections ══ -->
+                        <t t-if="o.freight_service_type == 'air'">
+
+                            <h6 class="fw-bold mt-3 mb-1">1. Rate for airfreight</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.air_rate_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">2. Ex-work at the airport of loading.</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.air_local_charge_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">3. Local charge at the airport of delivery.</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.air_exw_fee_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!-- ══ Trucking Sections ══ -->
+                        <t t-if="o.freight_service_type == 'trucking'">
+
+                            <h6 class="fw-bold mt-3 mb-1">1. Trucking fee</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.trucking_rate_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h6 class="fw-bold mt-3 mb-1">2. Customs fee for <t t-if="o.freight_direction == 'import'">Import</t><t t-else="">export</t> shipment</h6>
+                            <table class="table table-sm table-bordered" style="table-layout: fixed; width: 100%;">
+                                <colgroup><col style="width:28%"/><col style="width:12%"/><col style="width:12%"/><col style="width:10%"/><col style="width:12%"/><col style="width:26%"/></colgroup>
+                                <thead class="table-light">
+                                    <tr><th style="font-weight:bold;">Name</th><th style="font-weight:bold;" class="text-end">Quantity</th><th style="font-weight:bold;" class="text-end">Rate</th><th style="font-weight:bold;">Unit</th><th style="font-weight:bold;" class="text-end">Total</th><th style="font-weight:bold;">Note</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.trucking_surcharge_ids" t-as="line">
+                                        <td><t t-esc="line.name or ''"/></td>
+                                        <td class="text-end"><t t-esc="int(line.quantity) if line.quantity == int(line.quantity) else line.quantity"/></td>
+                                        <td class="text-end"><t t-esc="int(line.rate) if line.rate == int(line.rate) else '%.2f' % line.rate"/></td>
+                                        <td><t t-if="line.unit"><span t-field="line.unit"/></t></td>
+                                        <td class="text-end"><t t-esc="int(line.total) if line.total == int(line.total) else '%.2f' % line.total"/></td>
+                                        <td><t t-esc="line.note or ''"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!-- Grand Total -->
+                        <div class="row justify-content-end mt-4">
+                            <div class="col-5">
+                                <table class="table table-sm">
+                                    <tr class="fw-bold border-top">
+                                        <td class="text-uppercase">Grand Total</td>
+                                        <td class="text-end">
+                                            <span t-field="o.amount_total" t-options='{"widget":"monetary","display_currency":o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Notes / Footer -->
+                        <div class="mt-4 pt-3 border-top text-muted small" t-if="o.freight_service_type == 'fcl'">
+                            <p>We do hope that the above match your inquiry. For further info, please do not hesitate to contact us
+                            at anytime.</p>
+                            <p>Many thanks and best regards.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-top text-muted small" t-if="o.freight_service_type != 'fcl'">
+                            <p><strong>Note :</strong> The above rates are subject 10% VAT,</p>
+                            <p>We do hope that the above match your inquiry. For further info, please do not hesitate to contact us
+                            at anytime.</p>
+                            <p>Many thanks and best regards.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="freight_forwarding_home.Dashboard">
+        <div class="freight_forwarding-home">
+            <div class="freight_forwarding-home-header">
+                <div class="freight_forwarding-home-logo">
+                    <span class="freight_forwarding-home-logo-icon">🚢</span>
+                    <span class="freight_forwarding-home-logo-text">Freight_Forwarding Logistics</span>
+                </div>
+                <p class="freight_forwarding-home-welcome">Welcome back, <t t-esc="userName"/></p>
+            </div>
+
+            <div class="freight_forwarding-home-grid">
+
+                <div class="freight_forwarding-tile" t-on-click="openSales">
+                    <div class="freight_forwarding-tile-icon freight_forwarding-tile-icon-sales">
+                        <i class="fa fa-line-chart"/>
+                    </div>
+                    <div class="freight_forwarding-tile-body">
+                        <h3>Sales</h3>
+                        <p>Manage quotations and orders</p>
+                    </div>
+                    <div class="freight_forwarding-tile-arrow">
+                        <i class="fa fa-chevron-right"/>
+                    </div>
+                </div>
+
+                <div class="freight_forwarding-tile" t-on-click="openCRM">
+                    <div class="freight_forwarding-tile-icon freight_forwarding-tile-icon-crm">
+                        <i class="fa fa-bullseye"/>
+                    </div>
+                    <div class="freight_forwarding-tile-body">
+                        <h3>CRM</h3>
+                        <p>Track leads and pipeline</p>
+                    </div>
+                    <div class="freight_forwarding-tile-arrow">
+                        <i class="fa fa-chevron-right"/>
+                    </div>
+                </div>
+
+                <div class="freight_forwarding-tile" t-on-click="openMasterData">
+                    <div class="freight_forwarding-tile-icon freight_forwarding-tile-icon-masterdata">
+                        <i class="fa fa-database"/>
+                    </div>
+                    <div class="freight_forwarding-tile-body">
+                        <h3>System Master Data</h3>
+                        <p>Ports, service types, HS codes and more</p>
+                    </div>
+                    <div class="freight_forwarding-tile-arrow">
+                        <i class="fa fa-chevron-right"/>
+                    </div>
+                </div>
+
+                <div class="freight_forwarding-tile" t-on-click="openShipment">
+                    <div class="freight_forwarding-tile-icon freight_forwarding-tile-icon-shipment">
+                        <i class="fa fa-ship"/>
+                    </div>
+                    <div class="freight_forwarding-tile-body">
+                        <h3>Shipment</h3>
+                        <p>Jobs, containers and freight ops</p>
+                    </div>
+                    <div class="freight_forwarding-tile-arrow">
+                        <i class="fa fa-chevron-right"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </t>
+</templates>

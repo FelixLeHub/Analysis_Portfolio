@@ -1,0 +1,101 @@
+.o_opportunity_kanban {
+    background: #f5f8ff;
+}
+
+.o_opportunity_kanban .o_kanban_group {
+    background: rgba(224, 235, 255, 0.55);
+    border-radius: 18px 18px 0 0;
+    border: 1px solid #dce7fb;
+}
+
+.o_opportunity_kanban .o_kanban_header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #d9e4fb;
+}
+
+.o_freight_forwarding_crm_freight_card {
+    border: 1px solid #d8e3f7;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px 12px;
+    box-shadow: 0 2px 8px rgba(34, 55, 89, 0.06);
+}
+
+.o_freight_forwarding_crm_freight_card_header {
+    margin-bottom: 6px;
+}
+
+.o_freight_forwarding_crm_freight_card_title {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a2233;
+    margin: 0;
+}
+
+.o_freight_forwarding_crm_freight_card_body {
+    display: grid;
+    gap: 3px;
+}
+
+.o_freight_forwarding_crm_freight_row {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 6px;
+    align-items: start;
+    font-size: 0.78rem;
+}
+
+.o_freight_forwarding_crm_freight_label {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.o_freight_forwarding_crm_freight_value {
+    color: #111827;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.o_freight_forwarding_crm_freight_row_revenue {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid #edf2ff;
+}
+
+.o_freight_forwarding_crm_freight_revenue {
+    font-weight: 700;
+    color: #111827;
+    font-size: 0.78rem;
+}
+
+/* Remove empty placeholder rows in one2many editable lists */
+.o_field_one2many .o_list_renderer {
+    min-height: 0 !important;
+}
+.o_field_one2many .o_list_renderer table {
+    min-height: 0 !important;
+}
+.o_field_one2many .o_list_renderer .o_list_table tbody .o_data_row.o_list_no_open {
+    display: none;
+}
+.o_field_one2many .o_renderer_min_height {
+    min-height: 0 !important;
+}
+
+/* Quotation form section headers */
+.o_lead_opportunity_form .o_inner_group > .o_group_header,
+.o_lead_opportunity_form .o_group .o_group_header {
+    font-size: 1.1rem !important;
+}
+.o_lead_opportunity_form .fw-bold.mt-3 {
+    font-size: 1.1rem !important;
+}
+
+.o_freight_forwarding_crm_freight_card_footer {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid #edf2ff;
+}

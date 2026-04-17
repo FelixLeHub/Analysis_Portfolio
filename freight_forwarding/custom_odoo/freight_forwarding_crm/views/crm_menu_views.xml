@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ═══ Hide unwanted CRM top-level menus ═══ -->
+    <record id="crm.crm_menu_sales" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="crm.crm_menu_leads" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="crm.menu_import_crm" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="crm.crm_menu_report" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="crm.crm_menu_config" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- ═══ New top-level tabs under CRM ═══ -->
+
+    <!-- 1. Sales (hover shows Lead Pipeline + Quotation) -->
+    <menuitem id="menu_crm_sales_tab"
+              name="Sales"
+              parent="crm.crm_menu_root"
+              sequence="1"/>
+
+    <!-- Sales > Lead Pipeline (first — loads by default) -->
+    <menuitem id="menu_crm_sales_pipeline"
+              name="Lead Pipeline"
+              parent="menu_crm_sales_tab"
+              action="crm.crm_lead_action_pipeline"
+              sequence="1"/>
+
+    <!-- Sales > Quotation -->
+    <menuitem id="menu_crm_sales_quotation"
+              name="Quotation"
+              parent="menu_crm_sales_tab"
+              action="action_crm_lead_quotation_list"
+              sequence="10"/>
+
+    <!-- 2. Customers (filtered contacts showing only customers) -->
+    <record id="action_crm_customers" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="domain">['|', ('customer_rank', '>', 0), ('category_id.name', '=', 'Customer')]</field>
+        <field name="context">{'default_customer_rank': 1}</field>
+    </record>
+
+    <menuitem id="menu_crm_customers_tab"
+              name="Customers"
+              parent="crm.crm_menu_root"
+              action="action_crm_customers"
+              sequence="20"/>
+
+    <!-- 3. Archive (lost/archived leads) -->
+    <record id="action_crm_archive" model="ir.actions.act_window">
+        <field name="name">Archived Leads</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="domain">[('active', '=', False)]</field>
+        <field name="context">{'active_test': False}</field>
+    </record>
+
+    <menuitem id="menu_crm_archive_tab"
+              name="Archive"
+              parent="crm.crm_menu_root"
+              action="action_crm_archive"
+              sequence="25"/>
+
+</odoo>

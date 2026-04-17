@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_logistics_charge_type_list" model="ir.ui.view">
+        <field name="name">logistics.charge.type.list</field>
+        <field name="model">logistics.charge.type</field>
+        <field name="arch" type="xml">
+            <list string="Charge Types" editable="bottom">
+                <field name="name"/>
+                <field name="code" optional="show"/>
+                <field name="category"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_logistics_charge_type" model="ir.actions.act_window">
+        <field name="name">Charge Types</field>
+        <field name="res_model">logistics.charge.type</field>
+        <field name="view_mode">list</field>
+    </record>
+
+</odoo>

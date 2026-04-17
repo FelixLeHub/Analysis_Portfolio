@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="job_sea_fcl_import" model="logistics.job">
+            <field name="name">UAT/JOB/SEA/IMP/001</field>
+            <field name="service_type">sea_fcl_import</field>
+            <field name="state">quotation</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_textile"/>
+            <field name="customer_ref">Freight_ForwardingLOGIS</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_unitex"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_import"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_import"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_unitex"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_one"/>
+            <field name="mbl_no">ONEYSGNE29709400</field>
+            <field name="hbl_no">Freight_ForwardingSOU2402004</field>
+            <field name="vessel_name">HAIAN ROSE</field>
+            <field name="voyage_no">114W</field>
+            <field name="pol">SINGAPORE</field>
+            <field name="pod">HO CHI MINH CITY</field>
+            <field name="place_of_delivery">Tan Binh ICD</field>
+            <field name="etd">2026-04-02</field>
+            <field name="eta">2026-04-07</field>
+            <field name="commodity">Textile raw materials</field>
+            <field name="hs_code">54075200</field>
+            <field name="package_count">770</field>
+            <field name="gross_weight">19800</field>
+            <field name="volume_cbm">60</field>
+            <field name="freight_terms">prepaid</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">UAT import case with 2 containers and quotation status.</field>
+        </record>
+
+        <record id="job_sea_fcl_export" model="logistics.job">
+            <field name="name">UAT/JOB/SEA/EXP/001</field>
+            <field name="service_type">sea_fcl_export</field>
+            <field name="state">confirmed</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_furniture"/>
+            <field name="customer_ref">ATLAS-UK</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_customer_furniture"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_export"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_export"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_atlas"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_maersk"/>
+            <field name="mbl_no">SHHCM2410605S</field>
+            <field name="hbl_no">BLVET240700050</field>
+            <field name="vessel_name">ATLANTIC BRIDGE</field>
+            <field name="voyage_no">2338W</field>
+            <field name="pol">HO CHI MINH CITY</field>
+            <field name="pod">SOUTHAMPTON</field>
+            <field name="place_of_delivery">RG9 5DD</field>
+            <field name="etd">2026-04-05</field>
+            <field name="eta">2026-05-03</field>
+            <field name="arrival_date">2026-05-04</field>
+            <field name="commodity">Wooden furniture</field>
+            <field name="hs_code">94036090</field>
+            <field name="package_count">18</field>
+            <field name="gross_weight">1080.7</field>
+            <field name="volume_cbm">17.69</field>
+            <field name="freight_terms">collect</field>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="exchange_rate">0.7900</field>
+            <field name="notes">UAT export case with UK destination and confirmed status.</field>
+        </record>
+
+        <record id="job_sea_lcl" model="logistics.job">
+            <field name="name">UAT/JOB/SEA/LCL/001</field>
+            <field name="service_type">sea_lcl</field>
+            <field name="state">in_progress</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_zippers"/>
+            <field name="customer_ref">SMOOTH-CAM</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_smooth"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_lcl"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_lcl"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_smooth"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_cosco"/>
+            <field name="mbl_no">COSLCL24030191</field>
+            <field name="hbl_no">SMLCL24030018</field>
+            <field name="vessel_name">VIRA BHUM</field>
+            <field name="voyage_no">0NA7IN1NC</field>
+            <field name="pol">SHANGHAI</field>
+            <field name="pod">PHNOM PENH</field>
+            <field name="place_of_delivery">Canadia ICD</field>
+            <field name="etd">2026-04-10</field>
+            <field name="eta">2026-04-18</field>
+            <field name="commodity">Zippers and garment accessories</field>
+            <field name="hs_code">96071900</field>
+            <field name="package_count">212</field>
+            <field name="gross_weight">660</field>
+            <field name="volume_cbm">1.36</field>
+            <field name="freight_terms">prepaid</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">UAT LCL case including one credit note from agent.</field>
+        </record>
+
+        <record id="job_air" model="logistics.job">
+            <field name="name">UAT/JOB/AIR/001</field>
+            <field name="service_type">air</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_air"/>
+            <field name="customer_ref">ACP-JP</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_air"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_air"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_air"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_acp"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_airline_ana"/>
+            <field name="mawb_no">205-69387356</field>
+            <field name="hawb_no">ACP-00239201</field>
+            <field name="flight_no">NH0109</field>
+            <field name="pol">HO CHI MINH CITY</field>
+            <field name="pod">TOKYO</field>
+            <field name="etd">2026-04-12</field>
+            <field name="eta">2026-04-13</field>
+            <field name="arrival_date">2026-04-13</field>
+            <field name="commodity">Electronic textile samples</field>
+            <field name="hs_code">85423900</field>
+            <field name="package_count">8</field>
+            <field name="gross_weight">212</field>
+            <field name="chargeable_weight">227</field>
+            <field name="volume_cbm">1.32</field>
+            <field name="incoterms">PP</field>
+            <field name="currency_id" ref="base.JPY"/>
+            <field name="exchange_rate">149.1900</field>
+            <field name="notes">UAT air case with AWB references and completed status.</field>
+        </record>
+
+        <record id="job_trucking" model="logistics.job">
+            <field name="name">UAT/JOB/TRUCK/001</field>
+            <field name="service_type">trucking</field>
+            <field name="state">confirmed</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_trucking"/>
+            <field name="customer_ref">TRK-BD-01</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_trucking"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_trucking"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_trucking"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_trucking"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_trucking"/>
+            <field name="pol">Binh Duong Warehouse</field>
+            <field name="pod">Aeon Distribution Center</field>
+            <field name="etd">2026-04-15</field>
+            <field name="eta">2026-04-15</field>
+            <field name="arrival_date">2026-04-15</field>
+            <field name="commodity">Wood panels for retail display</field>
+            <field name="package_count">45</field>
+            <field name="gross_weight">3200</field>
+            <field name="volume_cbm">12.4</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">UAT trucking case without container records.</field>
+        </record>
+
+        <record id="container_import_1" model="logistics.container">
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_import"/>
+            <field name="name">MOAU5823890</field>
+            <field name="container_type">40hc</field>
+            <field name="seal_no">VN01556AE</field>
+            <field name="gross_weight">9900</field>
+            <field name="package_count">385</field>
+            <field name="description">Polyester fabric rolls</field>
+        </record>
+
+        <record id="container_import_2" model="logistics.container">
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_import"/>
+            <field name="name">IAAU1765283</field>
+            <field name="container_type">40hc</field>
+            <field name="seal_no">VN01557AE</field>
+            <field name="gross_weight">9900</field>
+            <field name="package_count">385</field>
+            <field name="description">Dyed knitted fabric</field>
+        </record>
+
+        <record id="container_export_1" model="logistics.container">
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_export"/>
+            <field name="name">FCIU7323406</field>
+            <field name="container_type">40gp</field>
+            <field name="seal_no">KMB487698</field>
+            <field name="gross_weight">1080.7</field>
+            <field name="package_count">18</field>
+            <field name="description">Knocked-down wooden furniture</field>
+        </record>
+
+        <record id="agent_dn_import" model="logistics.agent.debit.note">
+            <field name="name">UAT-ADN-001</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_import"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_unitex"/>
+            <field name="note_type">debit</field>
+            <field name="date">2026-04-03</field>
+            <field name="due_date">2026-04-10</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">Chloe Byrne</field>
+            <field name="state">draft</field>
+            <field name="notes">Draft import DN for UI review.</field>
+        </record>
+
+        <record id="agent_dn_export" model="logistics.agent.debit.note">
+            <field name="name">UAT-ADN-002</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_export"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_atlas"/>
+            <field name="note_type">debit</field>
+            <field name="date">2026-04-06</field>
+            <field name="due_date">2026-05-03</field>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="prepared_by">Sharon Thanh</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Confirmed export DN for UK destination.</field>
+        </record>
+
+        <record id="agent_dn_lcl_credit" model="logistics.agent.debit.note">
+            <field name="name">UAT-ACN-001</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_lcl"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_smooth"/>
+            <field name="note_type">credit</field>
+            <field name="date">2026-04-12</field>
+            <field name="due_date">2026-04-20</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">Smooth Finance</field>
+            <field name="state">paid</field>
+            <field name="notes">Paid credit note to exercise SMOOTH scenario.</field>
+        </record>
+
+        <record id="agent_dn_air" model="logistics.agent.debit.note">
+            <field name="name">UAT-ADN-003</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_air"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_acp"/>
+            <field name="note_type">debit</field>
+            <field name="date">2026-04-12</field>
+            <field name="due_date">2026-04-18</field>
+            <field name="currency_id" ref="base.JPY"/>
+            <field name="prepared_by">ACP Cargo Desk</field>
+            <field name="state">paid</field>
+            <field name="notes">Paid air DN for completed job.</field>
+        </record>
+
+        <record id="agent_dn_trucking" model="logistics.agent.debit.note">
+            <field name="name">UAT-ADN-004</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_trucking"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_trucking"/>
+            <field name="note_type">debit</field>
+            <field name="date">2026-04-15</field>
+            <field name="due_date">2026-04-22</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">Local Trucking Ops</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Confirmed trucking vendor DN.</field>
+        </record>
+
+        <record id="agent_dn_import_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_import"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_ocean_freight"/>
+            <field name="name">Ocean Freight</field>
+            <field name="remarks">Per MBL</field>
+            <field name="quantity">1</field>
+            <field name="unit">MBL</field>
+            <field name="unit_price">550.00</field>
+            <field name="amount">550.00</field>
+            <field name="is_taxable">1</field>
+        </record>
+
+        <record id="agent_dn_import_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_import"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_thc"/>
+            <field name="name">THC</field>
+            <field name="remarks">Per Container</field>
+            <field name="quantity">2</field>
+            <field name="unit">Container</field>
+            <field name="unit_price">90.25</field>
+            <field name="amount">180.50</field>
+            <field name="is_taxable">1</field>
+        </record>
+
+        <record id="agent_dn_export_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_export"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_documentation_fee"/>
+            <field name="name">Documentation Fee</field>
+            <field name="remarks">Per HBL</field>
+            <field name="quantity">1</field>
+            <field name="unit">HBL</field>
+            <field name="unit_price">95.00</field>
+            <field name="amount">95.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_export_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_export"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_delivery_charge"/>
+            <field name="name">Delivery Charge</field>
+            <field name="remarks">Final delivery</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">855.50</field>
+            <field name="amount">855.50</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_lcl_credit_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_lcl_credit"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_profit_share"/>
+            <field name="name">Profit Share Adjustment</field>
+            <field name="remarks">Credit note</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">75.00</field>
+            <field name="amount">75.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_air_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_air"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_air_freight"/>
+            <field name="name">Air Freight</field>
+            <field name="remarks">Per chargeable weight</field>
+            <field name="quantity">227</field>
+            <field name="unit">KGS</field>
+            <field name="unit_price">7.20</field>
+            <field name="amount">1634.40</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_air_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_air"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_screening_charge"/>
+            <field name="name">Screening Charge</field>
+            <field name="remarks">Airport security</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">5600</field>
+            <field name="amount">5600</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_trucking_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_trucking"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_trucking"/>
+            <field name="name">Trucking</field>
+            <field name="remarks">Per trip</field>
+            <field name="quantity">1</field>
+            <field name="unit">Trip</field>
+            <field name="unit_price">120.00</field>
+            <field name="amount">120.00</field>
+            <field name="is_taxable">1</field>
+        </record>
+
+        <record id="agent_dn_trucking_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_trucking"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_pick_up"/>
+            <field name="name">Pick Up</field>
+            <field name="remarks">Warehouse collection</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">35.00</field>
+            <field name="amount">35.00</field>
+            <field name="is_taxable">1</field>
+        </record>
+
+        <record id="customer_dn_import" model="logistics.customer.debit.note">
+            <field name="name">UAT-CDN-001</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_import"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_textile"/>
+            <field name="contact_person">MR. TOAN</field>
+            <field name="issue_date">2026-04-04</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">TIFFANY</field>
+            <field name="state">draft</field>
+            <field name="notes">Draft customer debit note for import UI review.</field>
+        </record>
+
+        <record id="customer_dn_export" model="logistics.customer.debit.note">
+            <field name="name">UAT-CDN-002</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_fcl_export"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_furniture"/>
+            <field name="contact_person">MS. HOA</field>
+            <field name="issue_date">2026-04-07</field>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="prepared_by">ANNA</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Confirmed export invoice reference.</field>
+        </record>
+
+        <record id="customer_dn_lcl" model="logistics.customer.debit.note">
+            <field name="name">UAT-CDN-003</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_lcl"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_zippers"/>
+            <field name="contact_person">MR. LONG</field>
+            <field name="issue_date">2026-04-12</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">LINDA</field>
+            <field name="state">sent</field>
+            <field name="notes">Sent LCL billing example.</field>
+        </record>
+
+        <record id="customer_dn_air" model="logistics.customer.debit.note">
+            <field name="name">UAT-CDN-004</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_air"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_air"/>
+            <field name="contact_person">MS. MAI</field>
+            <field name="issue_date">2026-04-13</field>
+            <field name="currency_id" ref="base.JPY"/>
+            <field name="prepared_by">JENNY</field>
+            <field name="state">paid</field>
+            <field name="notes">Paid air billing example.</field>
+        </record>
+
+        <record id="customer_dn_trucking" model="logistics.customer.debit.note">
+            <field name="name">UAT-CDN-005</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_trucking"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_trucking"/>
+            <field name="contact_person">MR. PHAT</field>
+            <field name="issue_date">2026-04-15</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">TOMMY</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Confirmed trucking billing example.</field>
+        </record>
+
+        <record id="customer_dn_import_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_import"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_thc"/>
+            <field name="name">THC</field>
+            <field name="quantity">2</field>
+            <field name="unit">Container</field>
+            <field name="unit_price">65.00</field>
+            <field name="vat_percent">8</field>
+            <field name="amount_debit">140.40</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_import_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_import"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_documentation_fee"/>
+            <field name="name">Documentation Fee</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">35.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">35.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_export_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_export"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_sea_freight"/>
+            <field name="name">Sea Freight</field>
+            <field name="quantity">17.69</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">9.50</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">168.055</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_export_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_export"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_delivery_charge"/>
+            <field name="name">Delivery Charge</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">42.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">42.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_lcl_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_lcl"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_cfs_fee"/>
+            <field name="name">CFS Fee</field>
+            <field name="quantity">1.36</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">20.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">27.20</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_lcl_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_lcl"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_miscellaneous"/>
+            <field name="name">Miscellaneous Adjustment</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">0.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">0.00</field>
+            <field name="amount_credit">5.00</field>
+        </record>
+
+        <record id="customer_dn_air_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_air"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_air_freight"/>
+            <field name="name">Air Freight</field>
+            <field name="quantity">227</field>
+            <field name="unit">KGS</field>
+            <field name="unit_price">8.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">1816.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_air_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_air"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_screening_charge"/>
+            <field name="name">Screening Charge</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">6000</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">6000</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_trucking_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_trucking"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_trucking"/>
+            <field name="name">Trucking</field>
+            <field name="quantity">1</field>
+            <field name="unit">Trip</field>
+            <field name="unit_price">150.00</field>
+            <field name="vat_percent">8</field>
+            <field name="amount_debit">162.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_trucking_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_trucking"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_pick_up"/>
+            <field name="name">Pick Up</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">25.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">25.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="job_inv2407075" model="logistics.job">
+            <field name="name">2407015076</field>
+            <field name="service_type">sea_lcl</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_inv2407075"/>
+            <field name="customer_ref">INV2407/075</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_bangkok_lcl"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_customer_inv2407075"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_inv2407075"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_smooth"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_sitc"/>
+            <field name="mbl_no">MC-HCM2408-080</field>
+            <field name="hbl_no">BLVET240700050</field>
+            <field name="vessel_name">SITC SHANGDE</field>
+            <field name="voyage_no">2415N</field>
+            <field name="pol">BANGKOK, THAILAND</field>
+            <field name="pod">CAT LAI KHO 3</field>
+            <field name="place_of_delivery">CAT LAI KHO 3</field>
+            <field name="etd">2024-07-27</field>
+            <field name="eta">2024-07-30</field>
+            <field name="arrival_date">2024-07-30</field>
+            <field name="commodity">Local charges for LCL shipment</field>
+            <field name="package_count">11</field>
+            <field name="gross_weight">0</field>
+            <field name="volume_cbm">1.32</field>
+            <field name="freight_terms">prepaid</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">Imported from sample debit note INV2407/075 for UI testing.</field>
+        </record>
+
+        <record id="customer_dn_inv2407075" model="logistics.customer.debit.note">
+            <field name="name">INV2407/075</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_inv2407075"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_inv2407075"/>
+            <field name="contact_person">MR. TOAN</field>
+            <field name="issue_date">2024-07-29</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">Freight_Forwarding LOGISTICS</field>
+            <field name="state">sent</field>
+            <field name="notes">Sample UI record reproduced from provided debit note image.</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_sea_freight"/>
+            <field name="name">SEA FREIGHT</field>
+            <field name="quantity">1.32</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">10.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_handling_fee"/>
+            <field name="name">HANDLING FEE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">20.00</field>
+            <field name="vat_percent">8.0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_3" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_d_o_sea"/>
+            <field name="name">D/O SEA</field>
+            <field name="quantity">1</field>
+            <field name="unit">SET</field>
+            <field name="unit_price">35.00</field>
+            <field name="vat_percent">8.0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_4" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_cfs_fee"/>
+            <field name="name">CFS FEE</field>
+            <field name="quantity">1.32</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">16.00</field>
+            <field name="vat_percent">8.0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_5" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_cic_fee"/>
+            <field name="name">CIC FEE</field>
+            <field name="quantity">1.32</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">3.00</field>
+            <field name="vat_percent">8.0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_6" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_thc"/>
+            <field name="name">THC FEE</field>
+            <field name="quantity">1.32</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">6.00</field>
+            <field name="vat_percent">8.0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <record id="customer_dn_inv2407075_line_7" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_inv2407075"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_lss"/>
+            <field name="name">LSS</field>
+            <field name="quantity">1.32</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">10.00</field>
+            <field name="vat_percent">8.0</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+        <!-- =========================================================== -->
+        <!-- Invoice 241939: Air freight Hamburg → Ho Chi Minh City       -->
+        <!-- =========================================================== -->
+
+        <record id="job_air_inv241939" model="logistics.job">
+            <field name="name">EXPAIR-00188-04/2024</field>
+            <field name="service_type">air</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_furniture"/>
+            <field name="customer_ref">A24047609</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_ulrich"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_theodore"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_acp_gmbh"/>
+            <field name="mawb_no">172-81801381</field>
+            <field name="hawb_no">ACP-00239201</field>
+            <field name="flight_no">CV9111Z/18,CV78</field>
+            <field name="pol">HAMBURG</field>
+            <field name="pod">HO CHI MINH CITY</field>
+            <field name="etd">2024-04-12</field>
+            <field name="eta">2024-04-24</field>
+            <field name="arrival_date">2024-04-24</field>
+            <field name="commodity">VENEER</field>
+            <field name="package_count">1</field>
+            <field name="gross_weight">660</field>
+            <field name="chargeable_weight">660</field>
+            <field name="incoterms">PP</field>
+            <field name="currency_id" ref="base.EUR"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">Based on Invoice No. 241939 from Air Cargo Professionals GmbH.</field>
+        </record>
+
+        <record id="agent_dn_inv241939" model="logistics.agent.debit.note">
+            <field name="name">241939</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_air_inv241939"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_acp_gmbh"/>
+            <field name="note_type">debit</field>
+            <field name="date">2024-04-24</field>
+            <field name="due_date">2024-05-24</field>
+            <field name="currency_id" ref="base.EUR"/>
+            <field name="prepared_by">Anne Mei Tamura</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Invoice No. 241939, Acc.-No. 13489, Position-No. EXPAIR-00188-04/2024</field>
+        </record>
+
+        <record id="agent_dn_inv241939_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_inv241939"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_air_freight"/>
+            <field name="name">AIRFREIGHT</field>
+            <field name="remarks">660 kg chargeable weight</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">1361.74</field>
+            <field name="amount">1361.74</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_inv241939_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_inv241939"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_pick_up"/>
+            <field name="name">PICK UP</field>
+            <field name="remarks">Hamburg origin</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">211.75</field>
+            <field name="amount">211.75</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_inv241939_line_3" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_inv241939"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_x_ray"/>
+            <field name="name">X-RAY</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">114.67</field>
+            <field name="amount">114.67</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_inv241939_line_4" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_inv241939"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_airport_terminal_charge"/>
+            <field name="name">TERMINAL HANDLING CHARGES</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">59.73</field>
+            <field name="amount">59.73</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_dn_inv241939_line_5" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_inv241939"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_profit_share"/>
+            <field name="name">PROFIT SHARE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">32.58</field>
+            <field name="amount">32.58</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <!-- =========================================================== -->
+        <!-- Credit Note SMLCL23020016: Sea LCL Shanghai → Ho Chi Minh   -->
+        <!-- =========================================================== -->
+
+        <record id="job_sea_lcl_cn23020016" model="logistics.job">
+            <field name="name">SMLCL23020016</field>
+            <field name="service_type">sea_lcl</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_textile"/>
+            <field name="customer_ref">SMLCL23020016A</field>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_smooth_shanghai"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_cosco"/>
+            <field name="mbl_no">SHSHHCM23020163</field>
+            <field name="hbl_no">SMLCL23020016</field>
+            <field name="vessel_name">SKY RAINBOW</field>
+            <field name="voyage_no">V.0019S</field>
+            <field name="pol">SHANGHAI, CHINA</field>
+            <field name="pod">HOCHIMINH, VIETNAM</field>
+            <field name="etd">2023-02-10</field>
+            <field name="eta">2023-02-18</field>
+            <field name="arrival_date">2023-02-18</field>
+            <field name="commodity">General cargo LCL</field>
+            <field name="freight_terms">prepaid</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">Based on Credit Note JOB NO SMLCL23020016, DB NO SMLCL23020016A.</field>
+        </record>
+
+        <record id="container_cn23020016" model="logistics.container">
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_lcl_cn23020016"/>
+            <field name="name">BMOU2967368</field>
+            <field name="container_type">20gp</field>
+            <field name="description">LCL consolidation container</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016" model="logistics.agent.debit.note">
+            <field name="name">SMLCL23020016A</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_sea_lcl_cn23020016"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_smooth_shanghai"/>
+            <field name="note_type">credit</field>
+            <field name="date">2023-02-10</field>
+            <field name="due_date">2023-03-10</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">Smooth Cargo Shanghai</field>
+            <field name="state">paid</field>
+            <field name="agent_beneficiary">SMOOTH INTERNATIONAL LOGISTICS LIMITED</field>
+            <field name="agent_bank_name">China construction bank, Shenzhen branch, huangbeiling subbranch</field>
+            <field name="agent_bank_address">Hongchang square, NO2001 shennandong road, luohu Shenzhen, P.R.CHINA</field>
+            <field name="agent_swift_code">PCBCCNBJSZX</field>
+            <field name="agent_account_no">FOR USD: 4425 0100 0003 0000 1263 | FOR RMB: 4425 0100 0003 0000 1236 | FOR HKD: 4425 0100 0003 0000 1264</field>
+            <field name="notes">Credit Note DB NO SMLCL23020016A. Net amount: USD -60.00 (credit to Freight_Forwarding).</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_ocean_freight"/>
+            <field name="name">OCEAN FREIGHT PREPAID</field>
+            <field name="remarks">Credit adjustment</field>
+            <field name="quantity">10</field>
+            <field name="unit">CBM</field>
+            <field name="unit_price">-29.00</field>
+            <field name="amount">-290.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_documentation_fee"/>
+            <field name="name">DOC FEE</field>
+            <field name="quantity">1</field>
+            <field name="unit">SET</field>
+            <field name="unit_price">30.00</field>
+            <field name="amount">30.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_3" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_customs_clearance"/>
+            <field name="name">CUSTOMS CLEARANCE CHARGE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">30.00</field>
+            <field name="amount">30.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_4" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_cfs_fee"/>
+            <field name="name">CFS</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">10.00</field>
+            <field name="amount">10.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_5" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_trucking"/>
+            <field name="name">TRUCK FEE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Trip</field>
+            <field name="unit_price">100.00</field>
+            <field name="amount">100.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_6" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_gate_charges"/>
+            <field name="name">GATE CHARGES</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">30.00</field>
+            <field name="amount">30.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+
+        <record id="agent_cn_smlcl23020016_line_7" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_cn_smlcl23020016"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_profit_share"/>
+            <field name="name">PROFIT SHARE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">30.00</field>
+            <field name="amount">30.00</field>
+            <field name="is_taxable">0</field>
+        </record>
+        <!-- ============================================================
+             Invoice B102388: Sea FCL Export - Theodore Alexander → UK
+             Matching the provided import invoice image exactly
+             ============================================================ -->
+
+        <record id="job_b102388" model="logistics.job">
+            <field name="name">BI112485</field>
+            <field name="service_type">sea_fcl_export</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_consignee_brigths"/>
+            <field name="customer_ref">Freight_ForwardingLOGIS</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_theodore_hcm"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_brigths"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_atlas"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_one"/>
+            <field name="mbl_no">ONEYSGNE29709400</field>
+            <field name="vessel_name">HAIAN ROSE</field>
+            <field name="pol">HO CHI MINH CITY</field>
+            <field name="pod">SOUTHAMPTON</field>
+            <field name="place_of_delivery">RG9 5DD</field>
+            <field name="etd">2024-02-15</field>
+            <field name="eta">2024-03-10</field>
+            <field name="arrival_date">2024-03-11</field>
+            <field name="commodity">WOODEN FURNITURE, LAMPS AND ACCESSORIES</field>
+            <field name="hs_code">94036090</field>
+            <field name="package_count">18</field>
+            <field name="gross_weight">1080.7</field>
+            <field name="chargeable_weight">1080.7</field>
+            <field name="volume_cbm">17.69</field>
+            <field name="freight_terms">collect</field>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="notes">Reproduced from Import Invoice B102388 image for UI testing.</field>
+        </record>
+
+        <record id="container_b102388" model="logistics.container">
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_b102388"/>
+            <field name="name">MOAU5823890</field>
+            <field name="container_type">20gp</field>
+            <field name="seal_no">VN01556AE</field>
+            <field name="gross_weight">1080.7</field>
+            <field name="package_count">18</field>
+            <field name="description">WOODEN FURNITURE, LAMPS AND ACCESSORIES</field>
+        </record>
+
+        <record id="customer_dn_b102388" model="logistics.customer.debit.note">
+            <field name="name">B102388</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_b102388"/>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_consignee_brigths"/>
+            <field name="issue_date">2024-03-31</field>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="prepared_by">Chloe Byrne</field>
+            <field name="state">sent</field>
+            <field name="notes">Import Invoice B102388 - For Customer. VAT Number: GB943288108. Please Pay By: 03 May 2024.</field>
+        </record>
+
+        <!-- Line 1: Terminal Handling - Per Container - 188.00 -->
+        <record id="cdn_b102388_line_1" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_thc"/>
+            <field name="name">Terminal Handling</field>
+            <field name="quantity">1</field>
+            <field name="unit">Container</field>
+            <field name="unit_price">188.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">188.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 2: Documentation - Per MBL - 50.00 -->
+        <record id="cdn_b102388_line_2" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_documentation_fee"/>
+            <field name="name">Documentation</field>
+            <field name="quantity">1</field>
+            <field name="unit">MBL</field>
+            <field name="unit_price">50.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">50.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 3: ISPS Port Security Charge - Per Container - 15.50 -->
+        <record id="cdn_b102388_line_3" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_isps_port_security"/>
+            <field name="name">ISPS Port Security Charge</field>
+            <field name="quantity">1</field>
+            <field name="unit">Container</field>
+            <field name="unit_price">15.50</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">15.50</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 4: Customs Clearance - Per HBL Inclusive of 3 HS Codes - 75.00 -->
+        <record id="cdn_b102388_line_4" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_customs_clearance"/>
+            <field name="name">Customs Clearance</field>
+            <field name="quantity">1</field>
+            <field name="unit">HBL - Inclusive of 3 HS Codes</field>
+            <field name="unit_price">75.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">75.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 5: Delivery Charge - Per Container Delivery ex SOU to RG9 5DD - 460.00 -->
+        <record id="cdn_b102388_line_5" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_delivery_charge"/>
+            <field name="name">Delivery Charge</field>
+            <field name="quantity">1</field>
+            <field name="unit">Container Delivery ex SOU to RG9 5DD</field>
+            <field name="unit_price">460.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">460.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 6: Lo Lo - Per Container - 75.00 -->
+        <record id="cdn_b102388_line_6" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_lo_lo"/>
+            <field name="name">Lo Lo</field>
+            <field name="quantity">1</field>
+            <field name="unit">Container</field>
+            <field name="unit_price">75.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">75.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 7: Presentation - Per MBL - 17.00 -->
+        <record id="cdn_b102388_line_7" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_presentation"/>
+            <field name="name">Presentation</field>
+            <field name="quantity">1</field>
+            <field name="unit">MBL</field>
+            <field name="unit_price">17.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">17.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 8: Miscellaneous - Container maintenance fee with ONE - 20.00 -->
+        <record id="cdn_b102388_line_8" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_miscellaneous"/>
+            <field name="name">Miscellaneous</field>
+            <field name="quantity">1</field>
+            <field name="unit">Container maintenance fee with ONE</field>
+            <field name="unit_price">20.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">20.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- Line 9: Demurrage - 1 Day due to High Winds Port Closure & Bank Holiday - 50.00 -->
+        <record id="cdn_b102388_line_9" model="logistics.customer.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.customer_dn_b102388"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_demurrage"/>
+            <field name="name">Demurrage</field>
+            <field name="quantity">1</field>
+            <field name="unit">1 Day due to High Winds Port Closure &amp; Bank Holiday</field>
+            <field name="unit_price">50.00</field>
+            <field name="vat_percent">0</field>
+            <field name="amount_debit">50.00</field>
+            <field name="amount_credit">0.00</field>
+        </record>
+
+        <!-- ============================================================
+             Agent Debit Note ANB159470: Air import ICN -> SGN
+             ============================================================ -->
+
+        <record id="job_anb159470" model="logistics.job">
+            <field name="name">ANB159470</field>
+            <field name="service_type">air</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_freight_forwarding_logistics"/>
+            <field name="customer_ref">ANB159470</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_anb_air"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_freight_forwarding_air"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_anb_global"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_airline_tway"/>
+            <field name="mawb_no">722-2002 6974</field>
+            <field name="hawb_no">ANB159470</field>
+            <field name="flight_no">TW121</field>
+            <field name="pol">ICN - INCHEON, KOREA</field>
+            <field name="pod">SGN HOCHIMINH CITY, VIETNAM</field>
+            <field name="etd">2024-07-18</field>
+            <field name="eta">2024-07-18</field>
+            <field name="arrival_date">2024-07-18</field>
+            <field name="commodity">Air import local charges</field>
+            <field name="package_count">1</field>
+            <field name="gross_weight">60.0</field>
+            <field name="chargeable_weight">60.0</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="notes">Reproduced from ANB Debit Note ANB159470 image for UI testing.</field>
+        </record>
+
+        <record id="agent_dn_anb159470" model="logistics.agent.debit.note">
+            <field name="name">ANB159470</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_anb159470"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_anb_global"/>
+            <field name="note_type">debit</field>
+            <field name="date">2024-07-18</field>
+            <field name="due_date">2024-07-18</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">KEVIN LEE</field>
+            <field name="state">confirmed</field>
+            <field name="notes">Debit note amount due: USD 173.00 based on provided ANB image.</field>
+        </record>
+
+        <record id="agent_dn_anb159470_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_anb159470"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_air_freight"/>
+            <field name="name">AIR FREIGHT</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">93.00</field>
+            <field name="amount">93.00</field>
+        </record>
+
+        <record id="agent_dn_anb159470_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_anb159470"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_handling_fee"/>
+            <field name="name">HANDLING CHARGE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">30.00</field>
+            <field name="amount">30.00</field>
+        </record>
+
+        <record id="agent_dn_anb159470_line_3" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_anb159470"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_airport_terminal_charge"/>
+            <field name="name">AIRPORT TERMINAL CHARGE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">20.00</field>
+            <field name="amount">20.00</field>
+        </record>
+
+        <record id="agent_dn_anb159470_line_4" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_anb159470"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_customs_clearance"/>
+            <field name="name">CUSTOM CLEARANCE FEE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">15.00</field>
+            <field name="amount">15.00</field>
+        </record>
+
+        <record id="agent_dn_anb159470_line_5" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_anb159470"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_pick_up"/>
+            <field name="name">PICK-UP CHARGE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">15.00</field>
+            <field name="amount">15.00</field>
+        </record>
+
+        <!-- ============================================================
+             Agent Invoice IN-006237: Air import JFK -> SGN
+             ============================================================ -->
+
+        <record id="job_in006237" model="logistics.job">
+            <field name="name">AE-86478</field>
+            <field name="service_type">air</field>
+            <field name="state">done</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_freight_forwarding_logistics"/>
+            <field name="customer_ref">IN-006237</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_moore_giles"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_theodore"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_msl_express"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_airline_ana"/>
+            <field name="mawb_no">205-69387356</field>
+            <field name="hawb_no">NY101692</field>
+            <field name="flight_no">NH0109</field>
+            <field name="pol">JFK JOHN F KENNEDY INTL</field>
+            <field name="pod">SGN TAN SON NHAT INTL</field>
+            <field name="etd">2024-06-04</field>
+            <field name="eta">2024-06-04</field>
+            <field name="arrival_date">2024-06-04</field>
+            <field name="commodity">LEATHER</field>
+            <field name="package_count">1</field>
+            <field name="gross_weight">212</field>
+            <field name="chargeable_weight">227</field>
+            <field name="volume_cbm">1.36</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="notes">Reproduced from MSL Invoice IN-006237 image for UI testing.</field>
+        </record>
+
+        <record id="agent_dn_in006237" model="logistics.agent.debit.note">
+            <field name="name">IN-006237</field>
+            <field name="job_id" ref="freight_forwarding_freight_uat.job_in006237"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_msl_express"/>
+            <field name="note_type">debit</field>
+            <field name="date">2023-08-15</field>
+            <field name="due_date">2023-08-15</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="prepared_by">Sharon Thanh</field>
+            <field name="state">confirmed</field>
+            <field name="notes">MSL Express invoice IN-006237, total due USD 822.05.</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_1" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_air_freight"/>
+            <field name="name">AIR FREIGHT CHARGE</field>
+            <field name="quantity">212</field>
+            <field name="unit">KG</field>
+            <field name="unit_price">1.70</field>
+            <field name="amount">360.40</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_2" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_screening_charge"/>
+            <field name="name">SCREENING CHARGE</field>
+            <field name="quantity">212</field>
+            <field name="unit">KG</field>
+            <field name="unit_price">0.20</field>
+            <field name="amount">42.40</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_3" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_airport_terminal_charge"/>
+            <field name="name">TERMINAL CHARGES</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">50.00</field>
+            <field name="amount">50.00</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_4" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_handling_fee"/>
+            <field name="name">HANDLING CHARGE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">35.00</field>
+            <field name="amount">35.00</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_5" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_aes_eei_filing"/>
+            <field name="name">AES/EEI FILING</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">25.00</field>
+            <field name="amount">25.00</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_6" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_trucking"/>
+            <field name="name">TRUCKING CHARGE</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">295.00</field>
+            <field name="amount">295.00</field>
+        </record>
+
+        <record id="agent_dn_in006237_line_7" model="logistics.agent.debit.note.line">
+            <field name="debit_note_id" ref="freight_forwarding_freight_uat.agent_dn_in006237"/>
+            <field name="charge_type_id" ref="freight_forwarding_freight.charge_type_volume_share"/>
+            <field name="name">VOLUME SHARE (227-212)X(1.7+0.2)X50%</field>
+            <field name="quantity">1</field>
+            <field name="unit">Shipment</field>
+            <field name="unit_price">14.25</field>
+            <field name="amount">14.25</field>
+        </record>
+
+    </data>
+</odoo>

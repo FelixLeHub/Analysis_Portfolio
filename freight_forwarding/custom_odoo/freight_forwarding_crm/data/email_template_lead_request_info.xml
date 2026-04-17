@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_lead_request_info" model="mail.template">
+        <field name="name">Lead: Request Quotation Information</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="subject">Request for Additional Information - {{ object.name }}</field>
+        <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or '') }}</field>
+        <field name="email_to">{{ object.email_from }}</field>
+        <field name="body_html"><![CDATA[
+<p>Dear {{ object.partner_id.name or object.contact_name or 'Customer' }},</p>
+
+<p>Thank you for your inquiry regarding freight services. In order to provide you with an accurate quotation, we kindly request the following additional details:</p>
+
+<ul>
+    <li><strong>Commodity:</strong> Please provide a description of the goods to be shipped.</li>
+    <li><strong>Weight (KGS):</strong> Total gross weight of the shipment.</li>
+    <li><strong>Volume (CBM):</strong> Total volume of the shipment.</li>
+    <li><strong>Dimensions:</strong> Length x Width x Height of the cargo/packages.</li>
+    <li><strong>Number of Pallets/Packages:</strong> Total quantity of handling units.</li>
+    <li><strong>Pickup/Delivery Address:</strong> Full address for collection and delivery (if applicable).</li>
+    <li><strong>Preferred Incoterm:</strong> e.g. EXW, FOB, CIF, etc.</li>
+    <li><strong>Special Requirements:</strong> Any hazardous goods, temperature control, or other special handling needs.</li>
+</ul>
+
+<p>Please provide the above information at your earliest convenience so we can prepare a competitive quotation for you.</p>
+
+<p>Should you have any questions, please do not hesitate to contact us.</p>
+
+<p>Best regards,</p>
+        ]]></field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>

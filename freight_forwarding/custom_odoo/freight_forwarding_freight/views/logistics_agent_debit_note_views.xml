@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_logistics_agent_debit_note_list" model="ir.ui.view">
+        <field name="name">logistics.agent.debit.note.list</field>
+        <field name="model">logistics.agent.debit.note</field>
+        <field name="arch" type="xml">
+            <list string="Agent Debit Notes" decoration-muted="state == 'draft'">
+                <field name="name"/>
+                <field name="job_id"/>
+                <field name="agent_id"/>
+                <field name="note_type"/>
+                <field name="date"/>
+                <field name="due_date" optional="show"/>
+                <field name="currency_id"/>
+                <field name="total_amount"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-success="state == 'paid'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_logistics_agent_debit_note_form" model="ir.ui.view">
+        <field name="name">logistics.agent.debit.note.form</field>
+        <field name="model">logistics.agent.debit.note</field>
+        <field name="arch" type="xml">
+            <form string="Agent Debit / Credit Note">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_paid" type="object" string="Mark Paid"
+                            class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_draft" type="object" string="Reset to Draft"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Debit Note" invisible="note_type == 'credit'"/>
+                        <label for="name" string="Credit Note" invisible="note_type != 'credit'"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Reference">
+                            <field name="job_id"/>
+                            <field name="agent_id"/>
+                            <field name="note_type"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group string="Dates">
+                            <field name="date"/>
+                            <field name="due_date"/>
+                            <field name="prepared_by"/>
+                            <field name="total_amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Shipment">
+                            <field name="service_type"/>
+                            <field name="vessel_name" invisible="not vessel_name"/>
+                            <field name="voyage_no" invisible="not voyage_no"/>
+                            <field name="flight_no" invisible="not flight_no"/>
+                            <field name="mbl_no" invisible="not mbl_no"/>
+                            <field name="hbl_no" invisible="not hbl_no"/>
+                            <field name="mawb_no" invisible="not mawb_no"/>
+                            <field name="hawb_no" invisible="not hawb_no"/>
+                        </group>
+                        <group string="Routing">
+                            <field name="pol"/>
+                            <field name="pod"/>
+                            <field name="etd"/>
+                            <field name="eta"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Charge Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="charge_type_id"/>
+                                    <field name="name"/>
+                                    <field name="remarks"/>
+                                    <field name="quantity"/>
+                                    <field name="unit"/>
+                                    <field name="unit_price"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="amount" sum="Total"/>
+                                    <field name="secondary_currency_id" optional="hide"/>
+                                    <field name="secondary_amount" optional="hide"/>
+                                    <field name="implied_exchange_rate" optional="hide"/>
+                                    <field name="is_taxable"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_amount_words" nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+                        <page string="Containers" invisible="not container_ids">
+                            <field name="container_ids" readonly="1">
+                                <list>
+                                    <field name="name" string="Container No"/>
+                                    <field name="container_type" string="Type"/>
+                                    <field name="seal_no"/>
+                                    <field name="gross_weight"/>
+                                    <field name="package_count"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Bank Details">
+                            <group>
+                                <group>
+                                    <field name="agent_beneficiary"/>
+                                    <field name="agent_bank_name"/>
+                                    <field name="agent_bank_address"/>
+                                </group>
+                                <group>
+                                    <field name="agent_swift_code"/>
+                                    <field name="agent_account_no"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_logistics_agent_debit_note" model="ir.actions.act_window">
+        <field name="name">Agent Debit Notes</field>
+        <field name="res_model">logistics.agent.debit.note</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

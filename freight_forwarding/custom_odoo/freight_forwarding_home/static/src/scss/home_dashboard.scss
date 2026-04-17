@@ -1,0 +1,118 @@
+.freight_forwarding-home {
+    min-height: 100vh;
+    background: #f4f6f9;
+    padding: 40px;
+    font-family: 'Roboto', sans-serif;
+}
+
+// ── Header ──────────────────────────────────────────────
+.freight_forwarding-home-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.freight_forwarding-home-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.freight_forwarding-home-logo-icon {
+    font-size: 2.4rem;
+}
+
+.freight_forwarding-home-logo-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a3d6e;
+    letter-spacing: 0.5px;
+}
+
+.freight_forwarding-home-welcome {
+    font-size: 1.05rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+// ── Grid ────────────────────────────────────────────────
+.freight_forwarding-home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 860px;
+    margin: 0 auto;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ── Tile ────────────────────────────────────────────────
+.freight_forwarding-tile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.freight_forwarding-tile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    i {
+        font-size: 1.6rem;
+        color: #fff;
+    }
+
+    &.freight_forwarding-tile-icon-sales     { background: linear-gradient(135deg, #4776e6, #8e54e9); }
+    &.freight_forwarding-tile-icon-crm       { background: linear-gradient(135deg, #f7971e, #ffd200); }
+    &.freight_forwarding-tile-icon-masterdata { background: linear-gradient(135deg, #11998e, #38ef7d); }
+    &.freight_forwarding-tile-icon-shipment  { background: linear-gradient(135deg, #1a3d6e, #2196f3); }
+}
+
+.freight_forwarding-tile-body {
+    flex: 1;
+
+    h3 {
+        margin: 0 0 4px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1a1a2e;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #868e96;
+    }
+}
+
+.freight_forwarding-tile-arrow {
+    color: #ced4da;
+    font-size: 0.9rem;
+    transition: color 0.15s;
+
+    .freight_forwarding-tile:hover & {
+        color: #495057;
+    }
+}

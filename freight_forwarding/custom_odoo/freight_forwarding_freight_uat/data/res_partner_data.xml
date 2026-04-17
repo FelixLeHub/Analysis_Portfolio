@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="partner_customer_textile" model="res.partner">
+            <field name="name">Thanh Cong Textile Garment</field>
+            <field name="email">logistics@thanhcongtextile.com</field>
+            <field name="phone">+84-28-3888-1001</field>
+            <field name="street">36 Tay Thanh Street</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="zip">700000</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_furniture" model="res.partner">
+            <field name="name">Theodore Alexander HCM</field>
+            <field name="email">shipping@theodorealexander.com</field>
+            <field name="phone">+84-28-3888-1002</field>
+            <field name="street">Lot B2, Industrial Park</field>
+            <field name="city">Binh Duong</field>
+            <field name="zip">820000</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_zippers" model="res.partner">
+            <field name="name">Hela Clothing Accessories</field>
+            <field name="email">import@helaclothing.com</field>
+            <field name="phone">+84-28-3888-1003</field>
+            <field name="street">189 Nguyen Thi Minh Khai</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="zip">700000</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_air" model="res.partner">
+            <field name="name">Tex Vietnam Co., Ltd.</field>
+            <field name="email">airops@texvietnam.com</field>
+            <field name="phone">+84-28-3888-1004</field>
+            <field name="street">58 Song Than Zone</field>
+            <field name="city">Di An</field>
+            <field name="zip">820000</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_trucking" model="res.partner">
+            <field name="name">Nha Dep Binh Duong</field>
+            <field name="email">dispatch@nhadepbd.com</field>
+            <field name="phone">+84-28-3888-1005</field>
+            <field name="street">12 Tran Van On</field>
+            <field name="city">Thu Dau Mot</field>
+            <field name="zip">820000</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_inv2407075" model="res.partner">
+            <field name="name">THANH CONG TEXTILE GARMENT INVESTMENT TRADING JOINT STOCK COMPANY</field>
+            <field name="email">toan@tcgt.com.vn</field>
+            <field name="phone">/</field>
+            <field name="street">36 Tay Thanh St., Tay Thanh Ward, Tan Phu Dist.</field>
+            <field name="street2">Ho Chi Minh City, Vietnam</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="zip">700000</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="vat">0301446221</field>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_unitex" model="res.partner">
+            <field name="name">Unitex Logistics Pte Ltd</field>
+            <field name="email">ops@unitex.com.sg</field>
+            <field name="phone">+65-6222-1001</field>
+            <field name="country_id" ref="base.sg"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_atlas" model="res.partner">
+            <field name="name">Atlas Shipping UK Ltd</field>
+            <field name="email">exports@atlas-shipping.co.uk</field>
+            <field name="phone">+44-20-7000-1002</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_smooth" model="res.partner">
+            <field name="name">Smooth Cargo Co., Ltd.</field>
+            <field name="email">lcl@smoothcargo.com</field>
+            <field name="phone">+86-21-6000-1003</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_air" model="res.partner">
+            <field name="name">ANB Logistics Japan</field>
+            <field name="email">air@anb-logistics.jp</field>
+            <field name="phone">+81-3-6000-1004</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_trucking" model="res.partner">
+            <field name="name">Binh Duong Warehouse Services</field>
+            <field name="email">warehouse@bdws.vn</field>
+            <field name="phone">+84-274-3888-1006</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_bangkok_lcl" model="res.partner">
+            <field name="name">Bangkok LCL Consolidation Center</field>
+            <field name="email">ops@bangkoklcl.co.th</field>
+            <field name="phone">+66-2-600-7000</field>
+            <field name="country_id" ref="base.th"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_consignee_import" model="res.partner">
+            <field name="name">Thanh Cong Textile Warehouse</field>
+            <field name="email">warehouse@thanhcongtextile.com</field>
+            <field name="phone">+84-28-3999-2101</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_consignee_export" model="res.partner">
+            <field name="name">Theodore Alexander UK</field>
+            <field name="email">inbound@theodorealexander.co.uk</field>
+            <field name="phone">+44-20-7000-2202</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_consignee_lcl" model="res.partner">
+            <field name="name">Hela Clothing Cambodia</field>
+            <field name="email">receiving@helaclothing.com</field>
+            <field name="phone">+855-23-6000-2203</field>
+            <field name="country_id" ref="base.kh"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_consignee_air" model="res.partner">
+            <field name="name">ACP Trading Tokyo</field>
+            <field name="email">tokyo@acptrading.jp</field>
+            <field name="phone">+81-3-6111-2204</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_consignee_trucking" model="res.partner">
+            <field name="name">Aeon Distribution Center</field>
+            <field name="email">dock@aeondc.vn</field>
+            <field name="phone">+84-274-3999-2205</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_contact_toan" model="res.partner">
+            <field name="name">MR. TOAN</field>
+            <field name="type">contact</field>
+            <field name="parent_id" ref="freight_forwarding_freight_uat.partner_customer_inv2407075"/>
+            <field name="email">toan@tcgt.com.vn</field>
+            <field name="phone">/</field>
+        </record>
+
+        <record id="partner_notify_import" model="res.partner">
+            <field name="name">Freight_Forwarding Import Documentation</field>
+            <field name="email">docs-import@freight_forwarding.com</field>
+            <field name="phone">+84-28-3777-3301</field>
+            <field name="country_id" ref="base.vn"/>
+        </record>
+
+        <record id="partner_notify_export" model="res.partner">
+            <field name="name">Atlas Destination Office</field>
+            <field name="email">destination@atlas-shipping.co.uk</field>
+            <field name="phone">+44-20-7000-3302</field>
+            <field name="country_id" ref="base.uk"/>
+        </record>
+
+        <record id="partner_notify_lcl" model="res.partner">
+            <field name="name">Smooth Destination Office</field>
+            <field name="email">arrival@smoothcargo.com</field>
+            <field name="phone">+86-21-6000-3303</field>
+            <field name="country_id" ref="base.cn"/>
+        </record>
+
+        <record id="partner_notify_air" model="res.partner">
+            <field name="name">ACP Destination Office</field>
+            <field name="email">arrival@acptrading.jp</field>
+            <field name="phone">+81-3-6111-3304</field>
+            <field name="country_id" ref="base.jp"/>
+        </record>
+
+        <record id="partner_notify_trucking" model="res.partner">
+            <field name="name">Freight_Forwarding Trucking Control Tower</field>
+            <field name="email">trucking@freight_forwarding.com</field>
+            <field name="phone">+84-28-3777-3305</field>
+            <field name="country_id" ref="base.vn"/>
+        </record>
+
+        <record id="partner_notify_inv2407075" model="res.partner">
+            <field name="name">Freight_Forwarding Logistics Customer Service</field>
+            <field name="email">cs@freight_forwardinglogistics.com</field>
+            <field name="phone">+84-28-3777-7755</field>
+            <field name="country_id" ref="base.vn"/>
+        </record>
+
+        <record id="partner_agent_unitex" model="res.partner">
+            <field name="name">UNITEX</field>
+            <field name="email">finance@unitex.com.sg</field>
+            <field name="phone">+65-6222-4401</field>
+            <field name="country_id" ref="base.sg"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_agent_atlas" model="res.partner">
+            <field name="name">ATLAS</field>
+            <field name="email">billing@atlas-shipping.co.uk</field>
+            <field name="phone">+44-20-7000-4402</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_agent_smooth" model="res.partner">
+            <field name="name">SMOOTH</field>
+            <field name="email">billing@smoothcargo.com</field>
+            <field name="phone">+86-21-6000-4403</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_agent_acp" model="res.partner">
+            <field name="name">ACP</field>
+            <field name="email">billing@acptrading.jp</field>
+            <field name="phone">+81-3-6111-4404</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_agent_trucking" model="res.partner">
+            <field name="name">Freight_Forwarding Trucking Vendor</field>
+            <field name="email">billing@freight_forwardingtrucking.vn</field>
+            <field name="phone">+84-274-3888-4405</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_line_one" model="res.partner">
+            <field name="name">Ocean Network Express</field>
+            <field name="email">bookings@one-line.com</field>
+            <field name="phone">+65-6400-5001</field>
+            <field name="country_id" ref="base.sg"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_line_maersk" model="res.partner">
+            <field name="name">Maersk Line</field>
+            <field name="email">export@maersk.com</field>
+            <field name="phone">+45-33-630-5002</field>
+            <field name="country_id" ref="base.dk"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_line_cosco" model="res.partner">
+            <field name="name">COSCO Shipping</field>
+            <field name="email">lcl@cosco.com</field>
+            <field name="phone">+86-21-6100-5003</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_airline_ana" model="res.partner">
+            <field name="name">All Nippon Airways</field>
+            <field name="email">cargo@ana.co.jp</field>
+            <field name="phone">+81-3-6222-5004</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_airline_tway" model="res.partner">
+            <field name="name">T'way Air</field>
+            <field name="country_id" ref="base.kr"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_line_trucking" model="res.partner">
+            <field name="name">Freight_Forwarding Local Trucking Fleet</field>
+            <field name="email">fleet@freight_forwardingtrucking.vn</field>
+            <field name="phone">+84-274-3777-5005</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_line_sitc" model="res.partner">
+            <field name="name">SITC Line</field>
+            <field name="email">cs@sitcline.com</field>
+            <field name="phone">+86-21-6888-5006</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <!-- Invoice 241939: Air Cargo Professionals GmbH (Agent, Germany) -->
+        <record id="partner_agent_acp_gmbh" model="res.partner">
+            <field name="name">Air Cargo Professionals GmbH</field>
+            <field name="email">Anne_Mei.Tamura@acpdus.com</field>
+            <field name="phone">+49 211 1716650</field>
+            <field name="street">Frachtstrasse 26</field>
+            <field name="street2">Raum 3507 / 3 Etage</field>
+            <field name="city">Düsseldorf</field>
+            <field name="zip">40474</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="vat">DE 277619696</field>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <!-- Invoice 241939: Shipper R. Ulrich & Co. GmbH -->
+        <record id="partner_shipper_ulrich" model="res.partner">
+            <field name="name">R. ULRICH &amp; CO. GMBH</field>
+            <field name="street">21107 Hamburg</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <!-- Invoice 241939: Consignee Theodore Alexander HCM Ltd -->
+        <record id="partner_consignee_theodore" model="res.partner">
+            <field name="name">THEODORE ALEXANDER HCM LTD.</field>
+            <field name="street">BLOCK 50-57, STREET 1, LINH TRUNG II EPZ</field>
+            <field name="street2">BINH CHIEU WARD, THU DUC CITY</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="country_id" ref="base.vn"/>
+        </record>
+
+        <!-- Credit Note SMLCL23020016: SMOOTH INTERNATIONAL LOGISTICS LIMITED -->
+        <record id="partner_agent_smooth_shanghai" model="res.partner">
+            <field name="name">SMOOTH INTERNATIONAL LOGISTICS LIMITED</field>
+            <field name="street">Room3309, A Tower, Reith International</field>
+            <field name="street2">Yanhe North Road NO.1002, LuoHu District</field>
+            <field name="city">ShenZhen City</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <!-- Air DN ANB159470 -->
+        <record id="partner_customer_freight_forwarding_logistics" model="res.partner">
+            <field name="name">Freight_Forwarding LOGISTICS CO., LTD.</field>
+            <field name="street">5TH FLOOR, DINH LE BUILDING, NO.1 DINH LE STREET</field>
+            <field name="street2">WARD 13, DISTRICT 4</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_agent_anb_global" model="res.partner">
+            <field name="name">ANB GLOBAL LOGIS CO., LTD.</field>
+            <field name="street">#801-2, 194 Gohgang-daero</field>
+            <field name="street2">Gangseo-gu, Seoul 07631</field>
+            <field name="city">Seoul</field>
+            <field name="country_id" ref="base.kr"/>
+            <field name="email">kevin.lee@anbg1.co.kr</field>
+            <field name="phone">02-2038-3797</field>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_anb_air" model="res.partner">
+            <field name="name">ANB AIR EXPORT CONSOLIDATION</field>
+            <field name="country_id" ref="base.kr"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_consignee_freight_forwarding_air" model="res.partner">
+            <field name="name">Freight_Forwarding LOGISTICS AIR IMPORT TEAM</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <!-- Air invoice IN-006237 -->
+        <record id="partner_agent_msl_express" model="res.partner">
+            <field name="name">MSL EXPRESS INC.</field>
+            <field name="street">160-19 ROCKAWAY BLVD. 2ND FL</field>
+            <field name="street2">JAMAICA, NY, 11434</field>
+            <field name="city">New York</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="email">Sharon.Thanh@mslglobalexp.com</field>
+            <field name="phone">718-528 1833</field>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_shipper_moore_giles" model="res.partner">
+            <field name="name">MOORE &amp; GILES INC</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="supplier_rank">1</field>
+        </record>
+        <!-- Invoice B102388: Consignee - Brigths of Nettlebed -->
+        <record id="partner_consignee_brigths" model="res.partner">
+            <field name="name">BRIGTHS OF NETTLEBED</field>
+            <field name="street">KINGSTON HOUSE, HIGH STREET</field>
+            <field name="street2">TORQUAY, NETTLEBED</field>
+            <field name="city">HENLEY-ON-THAMES</field>
+            <field name="zip">RG9 5DD</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <!-- Invoice B102388: Shipper - Theodore Alexander HCM Ltd (full address) -->
+        <record id="partner_shipper_theodore_hcm" model="res.partner">
+            <field name="name">THEODORE ALEXANDER HCM LTD</field>
+            <field name="street">BLOCK 50-57, LINH TRUNG II EPZ</field>
+            <field name="street2">BINH CHIEU WARD, THU DUC CITY</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="supplier_rank">1</field>
+        </record>
+    </data>
+</odoo>

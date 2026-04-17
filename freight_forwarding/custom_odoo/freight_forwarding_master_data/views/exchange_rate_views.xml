@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_exchange_rate_list" model="ir.ui.view">
+        <field name="name">master.exchange.rate.list</field>
+        <field name="model">master.exchange.rate</field>
+        <field name="arch" type="xml">
+            <list string="Exchange Rates" editable="bottom">
+                <field name="date"/>
+                <field name="currency_id"/>
+                <field name="rate"/>
+                <field name="inverse_rate"/>
+                <field name="source"/>
+                <field name="company_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_exchange_rate" model="ir.actions.act_window">
+        <field name="name">Automatic Exchange Rate</field>
+        <field name="res_model">master.exchange.rate</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

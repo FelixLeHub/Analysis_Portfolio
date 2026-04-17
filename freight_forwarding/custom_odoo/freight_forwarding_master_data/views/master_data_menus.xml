@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_master_data_root"
+              name="System Master Data"
+              sequence="90"
+              web_icon="freight_forwarding_master_data,static/description/icon.png"/>
+
+    <!-- 1. Partner Management (uses Odoo's built-in contacts action) -->
+    <menuitem id="menu_partner_management"
+              name="Partner Management"
+              parent="menu_master_data_root"
+              action="contacts.action_contacts"
+              sequence="10"/>
+
+    <!-- 2. Port & Airport Management -->
+    <menuitem id="menu_port_airport"
+              name="Port &amp; Airport Management"
+              parent="menu_master_data_root"
+              action="action_port_airport"
+              sequence="20"/>
+
+    <!-- 3. Service Type -->
+    <menuitem id="menu_service_type"
+              name="Service Type"
+              parent="menu_master_data_root"
+              action="action_service_type"
+              sequence="30"/>
+
+    <!-- 4. Automatic Exchange Rate -->
+    <menuitem id="menu_exchange_rate"
+              name="Automatic Exchange Rate"
+              parent="menu_master_data_root"
+              action="action_exchange_rate"
+              sequence="40"/>
+
+    <!-- 5. HS Code Management -->
+    <menuitem id="menu_hs_code"
+              name="HS Code Management"
+              parent="menu_master_data_root"
+              action="action_hs_code"
+              sequence="50"/>
+
+    <!-- 6. Freight Pricelist -->
+    <menuitem id="menu_freight_pricelist"
+              name="Freight Pricelist"
+              parent="menu_master_data_root"
+              action="action_freight_pricelist"
+              sequence="60"/>
+</odoo>

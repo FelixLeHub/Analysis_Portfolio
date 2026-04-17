@@ -1,0 +1,21 @@
+{
+    'name': 'System Master Data',
+    'version': '19.0.1.0.0',
+    'category': 'Freight_Forwarding Logistics',
+    'summary': 'Centralized master data management for Freight_Forwarding Logistics',
+    'author': 'Freight_Forwarding Logistics',
+    'depends': ['base', 'contacts', 'crm'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/service_type_data.xml',
+        'views/port_airport_views.xml',
+        'views/service_type_views.xml',
+        'views/hs_code_views.xml',
+        'views/freight_pricelist_views.xml',
+        'views/exchange_rate_views.xml',
+        'views/master_data_menus.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

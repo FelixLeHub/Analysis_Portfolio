@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_freight_pricelist_list" model="ir.ui.view">
+        <field name="name">master.freight.pricelist.list</field>
+        <field name="model">master.freight.pricelist</field>
+        <field name="arch" type="xml">
+            <list string="Freight Pricelist">
+                <field name="partner_id"/>
+                <field name="partner_type"/>
+                <field name="lead_id"/>
+                <field name="service_type_id"/>
+                <field name="pol_id"/>
+                <field name="pod_id"/>
+                <field name="valid_to"/>
+                <field name="freq"/>
+                <field name="tt"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_freight_pricelist_form" model="ir.ui.view">
+        <field name="name">master.freight.pricelist.form</field>
+        <field name="model">master.freight.pricelist</field>
+        <field name="arch" type="xml">
+            <form string="Freight Pricelist">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="partner_type" widget="radio"/>
+                            <field name="lead_id"/>
+                            <field name="service_type_id"/>
+                            <field name="service_type_code" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="pol_id" string="POL" invisible="service_type_code in ('air', 'trucking')"/>
+                            <field name="pol_id" string="AOL" invisible="service_type_code != 'air'"/>
+                            <field name="pol_id" string="POD" invisible="service_type_code != 'trucking'"/>
+                            <field name="pod_id" string="POD" invisible="service_type_code in ('air', 'trucking')"/>
+                            <field name="pod_id" string="AOD" invisible="service_type_code != 'air'"/>
+                            <field name="pod_id" string="Final Destination" invisible="service_type_code != 'trucking'"/>
+                            <field name="valid_to"/>
+                            <field name="freq"/>
+                            <field name="tt"/>
+                        </group>
+                    </group>
+
+                    <field name="display_mode" invisible="1"/>
+                    <field name="is_carrier" invisible="1"/>
+                    <field name="is_agent" invisible="1"/>
+
+                    <!-- ═══ FCL: Carrier ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'fcl_carrier'">1. Ocean Rate</div>
+                    <field name="fcl_ocean_rate_ids" nolabel="1"
+                           invisible="display_mode != 'fcl_carrier'"
+                           context="{'default_section': 'ocean_rate'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ FCL: Agent ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'fcl_agent'">2. Local Charge</div>
+                    <field name="fcl_local_charge_ids" nolabel="1"
+                           invisible="display_mode != 'fcl_agent'"
+                           context="{'default_section': 'local_charge'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'fcl_agent'">3. Exw Fee</div>
+                    <field name="fcl_exw_fee_ids" nolabel="1"
+                           invisible="display_mode != 'fcl_agent'"
+                           context="{'default_section': 'exw_fee'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ LCL: Carrier ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'lcl_carrier'">1. Rate for LCL shipment</div>
+                    <field name="lcl_rate_ids" nolabel="1"
+                           invisible="display_mode != 'lcl_carrier'"
+                           context="{'default_section': 'lcl_rate'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="rates_name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ LCL: Agent ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'lcl_agent'">2. Ex-work cost at the port of loading</div>
+                    <field name="lcl_exw_fee_ids" nolabel="1"
+                           invisible="display_mode != 'lcl_agent'"
+                           context="{'default_section': 'lcl_exw_fee'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="rates_name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'lcl_agent'">3. LCL Local charge in HCM</div>
+                    <field name="lcl_local_charge_ids" nolabel="1"
+                           invisible="display_mode != 'lcl_agent'"
+                           context="{'default_section': 'lcl_local_charge'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="rates_name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'lcl_agent'">4. FCL Local charge in HCM</div>
+                    <field name="lcl_fcl_local_charge_ids" nolabel="1"
+                           invisible="display_mode != 'lcl_agent'"
+                           context="{'default_section': 'fcl_local_charge'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="rates_name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ Air: Carrier ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'air_carrier'">1. Rate for airfreight</div>
+                    <field name="air_line_ids" nolabel="1"
+                           invisible="display_mode != 'air_carrier'">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="units"/>
+                            <field name="kg_minus_45"/>
+                            <field name="kg_plus_45"/>
+                            <field name="kg_plus_100"/>
+                            <field name="kg_plus_300"/>
+                            <field name="kg_plus_500"/>
+                            <field name="kg_plus_1000"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ Air: Agent ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'air_agent'">2. Ex-work at the airport of loading</div>
+                    <field name="air_local_charge_ids" nolabel="1"
+                           invisible="display_mode != 'air_agent'"
+                           context="{'default_section': 'air_local_charge'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'air_agent'">3. Local charge at the airport of delivery</div>
+                    <field name="air_exw_fee_ids" nolabel="1"
+                           invisible="display_mode != 'air_agent'"
+                           context="{'default_section': 'air_exw_fee'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="rates"/>
+                            <field name="units"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ Trucking: Carrier ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'trucking_carrier'">1. Trucking fee</div>
+                    <field name="trucking_line_ids" nolabel="1"
+                           invisible="display_mode != 'trucking_carrier'"
+                           context="{'default_section': 'carrier'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="units"/>
+                            <field name="truck_1_5t"/>
+                            <field name="truck_3_5t"/>
+                            <field name="truck_5t"/>
+                            <field name="dc_20"/>
+                            <field name="dc_40"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ Trucking: Agent ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="display_mode != 'trucking_agent'">1. Trucking fee</div>
+                    <field name="trucking_agent_line_ids" nolabel="1"
+                           invisible="display_mode != 'trucking_agent'"
+                           context="{'default_section': 'agent'}">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name"/>
+                            <field name="units"/>
+                            <field name="cbm_1_3"/>
+                            <field name="cbm_3_5"/>
+                            <field name="cbm_5_10"/>
+                            <field name="dc_20"/>
+                            <field name="dc_40"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_freight_pricelist" model="ir.actions.act_window">
+        <field name="name">Freight Pricelist</field>
+        <field name="res_model">master.freight.pricelist</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

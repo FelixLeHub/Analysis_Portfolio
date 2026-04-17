@@ -1,0 +1,93 @@
+.o_form_view.o_freight_forwarding_bottom_chatter_form,
+.o_form_view:has(.o_form_renderer.o_freight_forwarding_bottom_chatter_form) {
+    .o_form_renderer {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .o_form_sheet_bg {
+        flex: 1 1 100%;
+        max-width: 1760px;
+        margin-right: 0;
+
+        @include media-breakpoint-up(xxl) {
+            --formView-sheetBg-padding-x: #{map-get($spacers, 4)};
+        }
+    }
+
+    .o_form_sheet {
+        @include media-breakpoint-up(lg) {
+            --formView-sheet-padding-x-lg: #{map-get($spacers, 4)};
+        }
+
+        @include media-breakpoint-up(xxl) {
+            --formView-sheet-padding-x-xxl: #{map-get($spacers, 4)};
+        }
+    }
+
+    .o-mail-Form-chatter {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 1760px;
+        padding: 0;
+        margin-top: map-get($spacers, 3);
+    }
+
+    .o-mail-Form-chatter.o-aside {
+        width: 100%;
+        padding: 0;
+    }
+
+    .o-mail-Chatter {
+        max-height: 28rem;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-lg;
+        background: $o-view-background-color;
+        box-shadow: 0 0.5rem 1.25rem rgba($black, 0.06);
+        overflow: auto;
+    }
+
+    .o-mail-Chatter-top {
+        background: linear-gradient(180deg, rgba($white, 0.98) 0%, rgba($gray-100, 0.95) 100%);
+        border-bottom: 1px solid rgba($border-color, 0.9);
+    }
+
+    .o-mail-Chatter-topbar {
+        padding: 0 map-get($spacers, 2);
+    }
+
+    .o-mail-Chatter-content {
+        background: $o-view-background-color;
+    }
+}
+
+.o_form_view.o_freight_forwarding_quote_review_form,
+.o_form_view:has(.o_form_renderer.o_freight_forwarding_quote_review_form) {
+    .o_form_sheet {
+        max-width: 1440px;
+    }
+
+    .o_field_html[name="quotation_review_html"] {
+        width: 100%;
+    }
+
+    .o_freight_forwarding_quote_review_frame {
+        width: 100%;
+        min-height: 78vh;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-lg;
+        background: $white;
+        overflow: hidden;
+        box-shadow: 0 0.5rem 1.25rem rgba($black, 0.06);
+    }
+
+    .o_freight_forwarding_quote_review_frame iframe {
+        display: block;
+        width: 100%;
+        min-height: 78vh;
+        border: 0;
+        background: $white;
+    }
+}

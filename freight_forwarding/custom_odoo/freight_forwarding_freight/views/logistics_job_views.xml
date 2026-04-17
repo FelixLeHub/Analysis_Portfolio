@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Operations Form                                               -->
+    <!-- ============================================================ -->
+    <record id="view_logistics_job_operation_form" model="ir.ui.view">
+        <field name="name">logistics.job.operation.form</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <form string="Operations Job" class="o_freight_forwarding_job_form o_freight_forwarding_bottom_chatter_form">
+                <header>
+                    <button name="action_open_quotation_form" type="object" string="Open Quotation"/>
+                    <button name="action_print_quotation" type="object" string="Print Quotation"
+                            invisible="not quotation_layout"/>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="oe_highlight" invisible="state != 'quotation'"/>
+                    <button name="action_in_progress" type="object" string="In Progress"
+                            class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_done" type="object" string="Done"
+                            class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <button name="action_quotation" type="object" string="Reset to Quotation"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="quotation,confirmed,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_account_moves" type="object"
+                                class="oe_stat_button" icon="fa-file-text-o"
+                                invisible="account_move_count == 0">
+                            <field name="account_move_count" widget="statinfo"
+                                   string="Invoices"/>
+                        </button>
+                        <button name="action_view_agent_debit_notes" type="object"
+                                class="oe_stat_button" icon="fa-file-text-o"
+                                invisible="agent_debit_note_count == 0">
+                            <field name="agent_debit_note_count" widget="statinfo"
+                                   string="Agent DN"/>
+                        </button>
+                        <button name="action_view_customer_debit_notes" type="object"
+                                class="oe_stat_button" icon="fa-file-text"
+                                invisible="customer_debit_note_count == 0">
+                            <field name="customer_debit_note_count" widget="statinfo"
+                                   string="Customer DN"/>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Service">
+                            <field name="service_type"/>
+                            <field name="quotation_layout" readonly="1"/>
+                            <field name="currency_id"/>
+                            <field name="incoterms"/>
+                            <field name="freight_terms"
+                                   invisible="service_type not in ('sea_fcl_import', 'sea_fcl_export', 'sea_lcl')"/>
+                            <field name="exchange_rate" invisible="not exchange_rate"/>
+                        </group>
+                        <group string="Commercial">
+                            <field name="lead_id" options="{'no_create': True}"/>
+                            <field name="customer_id"/>
+                            <field name="customer_ref"/>
+                            <field name="agent_id"/>
+                            <field name="shipping_line_id"/>
+                            <field name="subject" readonly="1" invisible="not subject"/>
+                            <field name="valid_until" readonly="1" invisible="not valid_until"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Shipper / Consignee">
+                            <field name="shipper_id"/>
+                            <field name="consignee_id"/>
+                            <field name="notify_party_id"/>
+                        </group>
+                        <group string="Routing">
+                            <field name="factory_name"/>
+                            <field name="pol"/>
+                            <field name="pod"/>
+                            <field name="place_of_delivery"
+                                   invisible="service_type not in ('sea_fcl_import', 'sea_fcl_export', 'sea_lcl')"/>
+                            <field name="etd"/>
+                            <field name="eta"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Sea Transport" name="sea_info" invisible="not is_sea">
+                            <group>
+                                <group>
+                                    <field name="mbl_no"/>
+                                    <field name="hbl_no"/>
+                                </group>
+                                <group>
+                                    <field name="vessel_name"/>
+                                    <field name="voyage_no"/>
+                                </group>
+                            </group>
+                            <field name="is_sea" invisible="1"/>
+                        </page>
+
+                        <page string="Air Transport" name="air_info" invisible="not is_air">
+                            <group>
+                                <group>
+                                    <field name="mawb_no"/>
+                                    <field name="hawb_no"/>
+                                </group>
+                                <group>
+                                    <field name="flight_no"/>
+                                </group>
+                            </group>
+                            <field name="is_air" invisible="1"/>
+                        </page>
+
+                        <page string="Dates &amp; Cargo" name="dates_cargo">
+                            <group>
+                                <group string="Dates">
+                                    <field name="arrival_date"/>
+                                </group>
+                                <group string="Cargo">
+                                    <field name="commodity"/>
+                                    <field name="hs_code"/>
+                                    <field name="package_count"/>
+                                    <field name="weight_kgs"/>
+                                    <field name="gross_weight"/>
+                                    <field name="chargeable_weight" invisible="not is_air"/>
+                                    <field name="volume_cbm"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Containers" name="containers"
+                              invisible="service_type in ('air', 'trucking')">
+                            <field name="container_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="container_type"/>
+                                    <field name="seal_no"/>
+                                    <field name="gross_weight"/>
+                                    <field name="package_count"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Quotation Snapshot" name="quotation_snapshot">
+                            <group>
+                                <group string="Quotation Header">
+                                    <field name="subject" readonly="1"/>
+                                    <field name="attention_to" readonly="1"/>
+                                    <field name="pic_name" readonly="1"/>
+                                    <field name="routing_summary" readonly="1" invisible="1"/>
+                                    <field name="volume_summary" readonly="1"/>
+                                    <field name="vat_percent" readonly="1"/>
+                                </group>
+                            </group>
+                            <group string="Quotation Notes" invisible="1">
+                                <field name="quotation_intro" readonly="1" nolabel="1"/>
+                                <field name="quotation_footer_note" readonly="1" nolabel="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Notes" name="notes" invisible="1">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Quotation Form                                                -->
+    <!-- ============================================================ -->
+    <record id="view_logistics_job_quotation_form" model="ir.ui.view">
+        <field name="name">logistics.job.quotation.form</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <form string="Quotation" class="o_freight_forwarding_job_form o_freight_forwarding_bottom_chatter_form">
+                <header>
+                    <button name="action_open_operations_form" type="object" string="Open Operations"
+                            invisible="state == 'quotation'"/>
+                    <button name="action_print_quotation" type="object" string="Print Quotation"
+                            class="oe_highlight" invisible="not quotation_layout"/>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="oe_highlight" invisible="state != 'quotation'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <button name="action_quotation" type="object" string="Reset to Quotation"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="quotation,confirmed,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="Quotation Header">
+                            <field name="lead_id" options="{'no_create': True}"/>
+                            <field name="customer_id"/>
+                            <field name="subject"/>
+                            <field name="attention_to"/>
+                            <field name="pic_name"/>
+                            <field name="valid_until"/>
+                        </group>
+                        <group string="Commercial Basis">
+                            <field name="currency_id"/>
+                            <field name="vat_percent"/>
+                            <field name="customer_ref"/>
+                            <field name="exchange_rate" invisible="not exchange_rate"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Shipment Parties">
+                            <field name="shipper_id"/>
+                            <field name="consignee_id"/>
+                            <field name="notify_party_id"/>
+                        </group>
+                    </group>
+
+                    <group invisible="not quotation_layout" string="Retrieve Rates">
+                        <group>
+                            <label for="pricelist_id"/>
+                            <div class="d-flex gap-2">
+                                <field name="pricelist_id" class="flex-grow-1"
+                                       options="{'no_create': True, 'no_open': True}"/>
+                                <button name="action_import_pricelist_rates" type="object"
+                                        string="Import" class="btn-primary"
+                                        invisible="not pricelist_id"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Advanced">
+                            <group>
+                                <group string="System Fields">
+                                    <field name="incoterms"/>
+                                    <field name="direction"/>
+                                    <field name="service_mode" string="Service Type"/>
+                                    <field name="routing_summary" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
+                    <group invisible="quotation_layout != 'trucking_customs'" col="1">
+                        <group string="Trucking &amp; Customs Summary">
+                            <group>
+                                <field name="pol" string="Quotation From"/>
+                                <field name="pod" string="Quotation To"/>
+                                <field name="place_of_delivery"/>
+                                <field name="commodity"/>
+                            </group>
+                            <group>
+                                <field name="hs_code"/>
+                                <field name="package_count"/>
+                                <field name="gross_weight"/>
+                                <field name="volume_cbm"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="1. Trucking Fee">
+                                <field name="truck_rate_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'truck_rate', 'quote_section_code': 'truck_rate'}">
+                                    <form string="Trucking Fee Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Port or Airport"/>
+                                                    <field name="destination_code" string="Destination"/>
+                                                </group>
+                                                <group string="Truck Rates">
+                                                    <field name="amount_1" string="Truck 1.5 tons"/>
+                                                    <field name="amount_2" string="Truck 3.5 tons"/>
+                                                    <field name="amount_3" string="Truck 5 tons"/>
+                                                    <field name="amount_4" string="20 DC"/>
+                                                    <field name="amount_5" string="40 DC"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Port or Airport"/>
+                                        <field name="destination_code" string="Destination"/>
+                                        <field name="amount_1" string="Truck 1.5 tons"/>
+                                        <field name="amount_2" string="Truck 3.5 tons"/>
+                                        <field name="amount_3" string="Truck 5 tons"/>
+                                        <field name="amount_4" string="20 DC"/>
+                                        <field name="amount_5" string="40 DC"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="2. Import Customs Fee">
+                                <field name="customs_import_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'customs_import', 'quote_section_code': 'customs_import'}">
+                                    <form string="Import Customs Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Types of Import"/>
+                                                    <field name="destination_code" string="Destination"/>
+                                                </group>
+                                                <group string="CBM / Container Rates">
+                                                    <field name="amount_1" string="1 - 3 CBMs"/>
+                                                    <field name="amount_2" string="3 - 5 CBMs"/>
+                                                    <field name="amount_3" string="5 - 10 CBMs"/>
+                                                    <field name="amount_4" string="20 DC"/>
+                                                    <field name="amount_5" string="40 DC"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Types of Import"/>
+                                        <field name="destination_code" string="Destination"/>
+                                        <field name="amount_1" string="1 - 3 CBMs"/>
+                                        <field name="amount_2" string="3 - 5 CBMs"/>
+                                        <field name="amount_3" string="5 - 10 CBMs"/>
+                                        <field name="amount_4" string="20 DC"/>
+                                        <field name="amount_5" string="40 DC"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="3. Export Customs Fee">
+                                <field name="customs_export_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'customs_export', 'quote_section_code': 'customs_export'}">
+                                    <form string="Export Customs Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Types"/>
+                                                    <field name="carrier_or_party" string="Clients"/>
+                                                </group>
+                                                <group string="CBM / Container Rates">
+                                                    <field name="amount_1" string="1 - 3 CBMs"/>
+                                                    <field name="amount_2" string="3 - 5 CBMs"/>
+                                                    <field name="amount_3" string="5 - 10 CBMs"/>
+                                                    <field name="amount_4" string="20 DC"/>
+                                                    <field name="amount_5" string="40 DC"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Types"/>
+                                        <field name="carrier_or_party" string="Clients"/>
+                                        <field name="amount_1" string="1 - 3 CBMs"/>
+                                        <field name="amount_2" string="3 - 5 CBMs"/>
+                                        <field name="amount_3" string="5 - 10 CBMs"/>
+                                        <field name="amount_4" string="20 DC"/>
+                                        <field name="amount_5" string="40 DC"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <group invisible="quotation_layout != 'sea_lcl'" col="1">
+                        <group string="LCL Shipment Summary">
+                            <group>
+                                <field name="factory_name"/>
+                                <field name="pol" string="POL"/>
+                                <field name="pod" string="POD"/>
+                                <field name="place_of_delivery" string="Final Destination"/>
+                                <field name="commodity"/>
+                                <field name="etd"/>
+                                <field name="eta"/>
+                            </group>
+                            <group>
+                                <field name="volume_cbm" string="Volume (CBM)"/>
+                                <field name="weight_kgs"/>
+                                <field name="gross_weight" string="Gross Weight (KGS)"/>
+                                <field name="chargeable_weight" string="CWT (KGS)"/>
+                                <field name="volume_weight_363" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="1. Rate for LCL Shipment">
+                                <field name="lcl_rate_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'lcl_rate', 'quote_section_code': 'lcl_rate'}">
+                                    <form string="LCL Rate Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Country"/>
+                                                    <field name="origin_code" string="POL"/>
+                                                    <field name="destination_code" string="POD"/>
+                                                    <field name="carrier_or_party" string="Carrier"/>
+                                                    <field name="transit_time" string="T/T"/>
+                                                </group>
+                                                <group string="Rate Breakdown">
+                                                    <field name="amount_1" string="Rate"/>
+                                                    <field name="amount_2" string="CFS"/>
+                                                    <field name="amount_3" string="THC"/>
+                                                    <field name="amount_4" string="CIC"/>
+                                                    <field name="amount_5" string="CLS"/>
+                                                    <field name="amount_6" string="FRE"/>
+                                                    <field name="amount_total" string="Total" readonly="1"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Country"/>
+                                        <field name="origin_code" string="POL"/>
+                                        <field name="destination_code" string="POD"/>
+                                        <field name="amount_1" string="Rate"/>
+                                        <field name="amount_2" string="CFS"/>
+                                        <field name="amount_3" string="THC"/>
+                                        <field name="amount_4" string="CIC"/>
+                                        <field name="amount_5" string="CLS"/>
+                                        <field name="amount_6" string="FRE"/>
+                                        <field name="transit_time" string="T/T"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="2. Ex-work at Port of Loading">
+                                <field name="lcl_exwork_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'lcl_exwork', 'quote_section_code': 'lcl_exwork'}">
+                                    <form string="LCL Ex-work Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Ex-work Charge"/>
+                                                    <field name="unit_description" string="Unit"/>
+                                                    <field name="amount" string="Amount"/>
+                                                </group>
+                                                <group>
+                                                    <field name="remark" string="Remark"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Ex-work Charge"/>
+                                        <field name="unit_description" string="Unit"/>
+                                        <field name="amount" string="Amount"/>
+                                        <field name="remark" string="Remark" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="3. Local Charge for LCL">
+                                <field name="lcl_local_lcl_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'lcl_local_lcl', 'quote_section_code': 'lcl_local_lcl'}">
+                                    <form string="LCL Local LCL Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Charge"/>
+                                                    <field name="unit_description" string="Unit"/>
+                                                    <field name="amount" string="Amount"/>
+                                                </group>
+                                                <group>
+                                                    <field name="remark" string="Remark"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Charge"/>
+                                        <field name="unit_description" string="Unit"/>
+                                        <field name="amount" string="Amount"/>
+                                        <field name="remark" string="Remark" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <group invisible="quotation_layout != 'sea_fcl'" col="1">
+                        <group string="FCL Shipment Summary">
+                            <group>
+                                <field name="pol" string="POL"/>
+                                <field name="pod" string="POD"/>
+                                <field name="place_of_delivery"/>
+                                <field name="commodity"/>
+                                <field name="freight_terms"/>
+                                <field name="etd"/>
+                                <field name="eta"/>
+                            </group>
+                            <group>
+                                <field name="volume_summary"/>
+                                <field name="volume_cbm"/>
+                                <field name="shipping_line_id"/>
+                                <field name="agent_id"/>
+                                <field name="vessel_name"/>
+                                <field name="voyage_no"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="1. Ocean Rate">
+                                <field name="fcl_ocean_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'fcl_ocean', 'quote_section_code': 'fcl_ocean'}">
+                                    <form string="Ocean Rate Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Lane"/>
+                                                    <field name="origin_code" string="POL"/>
+                                                    <field name="destination_code" string="POD"/>
+                                                    <field name="carrier_or_party" string="Carrier"/>
+                                                </group>
+                                                <group string="Schedule and Rate">
+                                                    <field name="amount_1" string="20'DC"/>
+                                                    <field name="amount_2" string="40'HC"/>
+                                                    <field name="transit_time" string="T/T"/>
+                                                    <field name="frequency" string="Frequency"/>
+                                                    <field name="note" string="Note"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Lane"/>
+                                        <field name="origin_code" string="POL"/>
+                                        <field name="destination_code" string="POD"/>
+                                        <field name="carrier_or_party" string="Carrier"/>
+                                        <field name="amount_1" string="20'DC"/>
+                                        <field name="amount_2" string="40'HC"/>
+                                        <field name="transit_time" string="T/T"/>
+                                        <field name="frequency" string="Frequency"/>
+                                        <field name="note" string="Note" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="2. Local Charge at HCM">
+                                <field name="fcl_local_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'fcl_local', 'quote_section_code': 'fcl_local'}">
+                                    <form string="FCL Local Charge Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Detail Charge"/>
+                                                    <field name="unit_description" string="Unit Price"/>
+                                                    <field name="amount_20dc" string="20'DC"/>
+                                                    <field name="amount_40hc" string="40'HC"/>
+                                                </group>
+                                                <group>
+                                                    <field name="include_in_total"/>
+                                                    <field name="remark" string="Remark"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Detail Charge"/>
+                                        <field name="unit_description" string="Unit Price"/>
+                                        <field name="amount_20dc" string="20'DC"/>
+                                        <field name="amount_40hc" string="40'HC"/>
+                                        <field name="include_in_total"/>
+                                        <field name="remark" string="Remark" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="3. EXW Fee">
+                                <field name="fcl_exwork_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'fcl_exwork', 'quote_section_code': 'fcl_exwork'}">
+                                    <form string="FCL Exw Fee Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Charge"/>
+                                                    <field name="unit_description" string="Unit"/>
+                                                    <field name="amount" string="Amount"/>
+                                                </group>
+                                                <group>
+                                                    <field name="include_in_total"/>
+                                                    <field name="remark" string="Remark"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Charge"/>
+                                        <field name="unit_description" string="Unit"/>
+                                        <field name="amount" string="Amount"/>
+                                        <field name="include_in_total"/>
+                                        <field name="remark" string="Remark" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <group invisible="quotation_layout != 'air'" col="1">
+                        <group string="Air Shipment Summary">
+                            <group>
+                                <field name="pol" string="AOL"/>
+                                <field name="pod" string="AOD"/>
+                                <field name="commodity"/>
+                                <field name="incoterms"/>
+                                <field name="flight_no"/>
+                                <field name="shipping_line_id" string="Airline"/>
+                                <field name="etd"/>
+                            </group>
+                            <group>
+                                <field name="package_count"/>
+                                <field name="gross_weight"/>
+                                <field name="chargeable_weight"/>
+                                <field name="mawb_no"/>
+                                <field name="hawb_no"/>
+                                <field name="eta"/>
+                                <field name="shipper_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="1. Rate for Airfreight">
+                                <field name="air_rate_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'air_rate', 'quote_section_code': 'air_rate'}">
+                                    <form string="Air Rate Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Lane"/>
+                                                    <field name="origin_code" string="AOL"/>
+                                                    <field name="destination_code" string="AOD"/>
+                                                    <field name="carrier_or_party" string="Carrier"/>
+                                                    <field name="transit_time" string="T/T"/>
+                                                </group>
+                                                <group string="Weight Breaks">
+                                                    <field name="amount_1" string="- 45 kgs"/>
+                                                    <field name="amount_2" string="+ 45 kgs"/>
+                                                    <field name="amount_3" string="+ 100 kgs"/>
+                                                    <field name="amount_4" string="+ 300 kgs"/>
+                                                    <field name="amount_5" string="+ 500 kgs"/>
+                                                    <field name="amount_6" string="+ 1000 kgs"/>
+                                                    <field name="note" string="FRE"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Lane"/>
+                                        <field name="origin_code" string="AOL"/>
+                                        <field name="destination_code" string="AOD"/>
+                                        <field name="carrier_or_party" string="Carrier"/>
+                                        <field name="amount_1" string="- 45 kgs"/>
+                                        <field name="amount_2" string="+ 45 kgs"/>
+                                        <field name="amount_3" string="+ 100 kgs"/>
+                                        <field name="amount_4" string="+ 300 kgs"/>
+                                        <field name="amount_5" string="+ 500 kgs"/>
+                                        <field name="amount_6" string="+ 1000 kgs"/>
+                                        <field name="note" string="FRE"/>
+                                        <field name="transit_time" string="T/T"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="2. Ex-work at Airport of Loading">
+                                <field name="air_exwork_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'air_exwork', 'quote_section_code': 'air_exwork'}">
+                                    <form string="Air Ex-work Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Charge"/>
+                                                    <field name="unit_description" string="Unit"/>
+                                                    <field name="amount" string="Amount"/>
+                                                </group>
+                                                <group>
+                                                    <field name="remark" string="Remark"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Charge"/>
+                                        <field name="unit_description" string="Unit"/>
+                                        <field name="amount" string="Amount"/>
+                                        <field name="remark" string="Remark" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="3. Local Charge at Airport of Delivery">
+                                <field name="air_local_line_ids"
+                                       nolabel="1"
+                                       context="{'default_section_code': 'air_local', 'quote_section_code': 'air_local'}">
+                                    <form string="Air Local Charge Line">
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="section_code" invisible="1"/>
+                                                    <field name="sequence"/>
+                                                    <field name="name" string="Charge"/>
+                                                    <field name="unit_description" string="Unit"/>
+                                                    <field name="amount" string="Amount"/>
+                                                </group>
+                                                <group>
+                                                    <field name="remark" string="Remark"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <list editable="bottom" open_form_view="True" create="1" delete="1">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name" string="Charge"/>
+                                        <field name="unit_description" string="Unit"/>
+                                        <field name="amount" string="Amount"/>
+                                        <field name="remark" string="Remark" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_logistics_job_quotation_review_form" model="ir.ui.view">
+        <field name="name">logistics.job.quotation.review.form</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Review" class="o_freight_forwarding_quote_review_form" create="0" edit="0" delete="0">
+                <header>
+                    <button name="action_open_quotation_form" type="object" string="Back to Quotation"/>
+                    <button name="action_open_operations_form" type="object" string="Open Operations"
+                            invisible="state == 'quotation'"/>
+                    <button name="action_download_quotation_pdf" type="object" string="Download PDF"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="quotation,confirmed,in_progress,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Review Details">
+                            <field name="name" readonly="1"/>
+                            <field name="customer_id" readonly="1"/>
+                            <field name="quotation_layout" readonly="1"/>
+                            <field name="valid_until" readonly="1"/>
+                        </group>
+                        <group string="Review Notes">
+                            <div class="o_form_label">
+                                Review the quotation below before downloading the PDF.
+                            </div>
+                        </group>
+                    </group>
+                    <field name="quotation_review_html" readonly="1" nolabel="1" widget="html"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Operation List                                                -->
+    <!-- ============================================================ -->
+    <record id="view_logistics_job_operation_list" model="ir.ui.view">
+        <field name="name">logistics.job.operation.list</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <list string="Jobs" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="service_type"/>
+                <field name="customer_id"/>
+                <field name="pol"/>
+                <field name="pod"/>
+                <field name="etd"/>
+                <field name="eta"/>
+                <field name="container_count" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-success="state in ('in_progress', 'done')"
+                       decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Quotation List                                                -->
+    <!-- ============================================================ -->
+    <record id="view_logistics_job_quotation_list" model="ir.ui.view">
+        <field name="name">logistics.job.quotation.list</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <list string="Quotations" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="quotation_layout"/>
+                <field name="customer_id"/>
+                <field name="attention_to" optional="show"/>
+                <field name="subject" optional="show"/>
+                <field name="pol"/>
+                <field name="pod"/>
+                <field name="valid_until"/>
+                <field name="salesperson_name" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'quotation'"
+                       decoration-warning="state == 'confirmed'"
+                       decoration-success="state in ('in_progress', 'done')"
+                       decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Operation Search                                              -->
+    <!-- ============================================================ -->
+    <record id="view_logistics_job_operation_search" model="ir.ui.view">
+        <field name="name">logistics.job.operation.search</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <search string="Operations Jobs">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="shipper_id"/>
+                <field name="consignee_id"/>
+                <field name="agent_id"/>
+                <field name="mbl_no"/>
+                <field name="hbl_no"/>
+                <field name="mawb_no"/>
+                <field name="hawb_no"/>
+                <filter name="filter_confirmed" string="Confirmed"
+                        domain="[('state', '=', 'confirmed')]"/>
+                <filter name="filter_in_progress" string="In Progress"
+                        domain="[('state', '=', 'in_progress')]"/>
+                <filter name="filter_done" string="Done"
+                        domain="[('state', '=', 'done')]"/>
+                <filter name="filter_cancelled" string="Cancelled"
+                        domain="[('state', '=', 'cancelled')]"/>
+                <filter name="group_service_type" string="Service Type"
+                        context="{'group_by': 'service_type'}"/>
+                <filter name="group_state" string="Status"
+                        context="{'group_by': 'state'}"/>
+                <filter name="group_customer" string="Customer"
+                        context="{'group_by': 'customer_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Quotation Search                                              -->
+    <!-- ============================================================ -->
+    <record id="view_logistics_job_quotation_search" model="ir.ui.view">
+        <field name="name">logistics.job.quotation.search</field>
+        <field name="model">logistics.job</field>
+        <field name="arch" type="xml">
+            <search string="Quotations">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="subject"/>
+                <field name="pol"/>
+                <field name="pod"/>
+                <field name="salesperson_name"/>
+                <field name="valid_until"/>
+                <filter name="filter_quote_trucking" string="Trucking and Customs"
+                        domain="[('quotation_layout', '=', 'trucking_customs')]"/>
+                <filter name="filter_quote_lcl" string="LCL Rate"
+                        domain="[('quotation_layout', '=', 'sea_lcl')]"/>
+                <filter name="filter_quote_fcl" string="Seafreight"
+                        domain="[('quotation_layout', '=', 'sea_fcl')]"/>
+                <filter name="filter_quote_air" string="Airfreight"
+                        domain="[('quotation_layout', '=', 'air')]"/>
+                <filter name="filter_valid" string="Has Valid Date"
+                        domain="[('valid_until', '!=', False)]"/>
+                <filter name="group_layout" string="Layout"
+                        context="{'group_by': 'quotation_layout'}"/>
+                <filter name="group_salesperson" string="Salesperson"
+                        context="{'group_by': 'salesperson_name'}"/>
+                <filter name="group_customer" string="Customer"
+                        context="{'group_by': 'customer_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Actions                                                       -->
+    <!-- ============================================================ -->
+    <record id="action_logistics_job" model="ir.actions.act_window">
+        <field name="name">Jobs</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '!=', 'quotation')]</field>
+        <field name="search_view_id" ref="view_logistics_job_operation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first operations job
+            </p>
+        </field>
+    </record>
+
+    <record id="action_logistics_job_quotation" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation')]</field>
+        <field name="context">{'default_state': 'quotation'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first quotation
+            </p>
+        </field>
+    </record>
+
+    <record id="action_logistics_job_quotation_trucking_customs" model="ir.actions.act_window">
+        <field name="name">Trucking and Customs Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation'), ('quotation_layout', '=', 'trucking_customs')]</field>
+        <field name="context">{'default_state': 'quotation', 'default_direction': 'export', 'default_service_mode': 'trucking', 'default_service_type': 'trucking', 'default_quotation_layout': 'trucking_customs'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_sea_lcl" model="ir.actions.act_window">
+        <field name="name">LCL Rate Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation'), ('quotation_layout', '=', 'sea_lcl')]</field>
+        <field name="context">{'default_state': 'quotation', 'default_direction': 'export', 'default_service_mode': 'lcl', 'default_service_type': 'sea_lcl', 'default_quotation_layout': 'sea_lcl'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_sea_fcl" model="ir.actions.act_window">
+        <field name="name">Seafreight Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation'), ('quotation_layout', '=', 'sea_fcl')]</field>
+        <field name="context">{'default_state': 'quotation', 'default_direction': 'export', 'default_service_mode': 'fcl', 'default_quotation_layout': 'sea_fcl'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_sea_fcl_import" model="ir.actions.act_window">
+        <field name="name">Sea FCL Import Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation'), ('service_type', '=', 'sea_fcl_import')]</field>
+        <field name="context">{'default_state': 'quotation', 'default_direction': 'import', 'default_service_mode': 'fcl', 'default_service_type': 'sea_fcl_import', 'default_quotation_layout': 'sea_fcl'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_sea_fcl_export" model="ir.actions.act_window">
+        <field name="name">Sea FCL Export Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation'), ('service_type', '=', 'sea_fcl_export')]</field>
+        <field name="context">{'default_state': 'quotation', 'default_direction': 'export', 'default_service_mode': 'fcl', 'default_service_type': 'sea_fcl_export', 'default_quotation_layout': 'sea_fcl'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_air" model="ir.actions.act_window">
+        <field name="name">Airfreight Quotations</field>
+        <field name="res_model">logistics.job</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'quotation'), ('quotation_layout', '=', 'air')]</field>
+        <field name="context">{'default_state': 'quotation', 'default_direction': 'export', 'default_service_mode': 'air', 'default_service_type': 'air', 'default_quotation_layout': 'air'}</field>
+        <field name="search_view_id" ref="view_logistics_job_quotation_search"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Action View Bindings                                          -->
+    <!-- ============================================================ -->
+    <record id="action_logistics_job_operation_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_operation_list"/>
+        <field name="act_window_id" ref="action_logistics_job"/>
+    </record>
+
+    <record id="action_logistics_job_operation_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_operation_form"/>
+        <field name="act_window_id" ref="action_logistics_job"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_trucking_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_trucking_customs"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_trucking_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_trucking_customs"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_lcl_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_lcl"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_lcl_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_lcl"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_fcl_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_fcl"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_fcl_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_fcl"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_fcl_import_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_fcl_import"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_fcl_import_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_fcl_import"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_fcl_export_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_fcl_export"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_fcl_export_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_sea_fcl_export"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_air_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_logistics_job_quotation_list"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_air"/>
+    </record>
+
+    <record id="action_logistics_job_quotation_air_form_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_logistics_job_quotation_form"/>
+        <field name="act_window_id" ref="action_logistics_job_quotation_air"/>
+    </record>
+
+</odoo>

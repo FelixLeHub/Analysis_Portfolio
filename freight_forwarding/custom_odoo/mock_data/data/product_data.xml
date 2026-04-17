@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Service Products -->
+        <record id="product_consulting" model="product.product">
+            <field name="name">IT Consulting Service</field>
+            <field name="type">service</field>
+            <field name="list_price">150.00</field>
+            <field name="standard_price">0.00</field>
+            <field name="uom_id" ref="uom.product_uom_hour"/>
+        </record>
+
+        <record id="product_support" model="product.product">
+            <field name="name">Technical Support</field>
+            <field name="type">service</field>
+            <field name="list_price">75.00</field>
+            <field name="standard_price">0.00</field>
+            <field name="uom_id" ref="uom.product_uom_hour"/>
+        </record>
+
+        <record id="product_training" model="product.product">
+            <field name="name">Employee Training Program</field>
+            <field name="type">service</field>
+            <field name="list_price">500.00</field>
+            <field name="standard_price">0.00</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <!-- Physical Products -->
+        <record id="product_laptop" model="product.product">
+            <field name="name">Business Laptop Pro</field>
+            <field name="type">consu</field>
+            <field name="list_price">1299.99</field>
+            <field name="standard_price">850.00</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="product_monitor" model="product.product">
+            <field name="name">27" 4K Monitor</field>
+            <field name="type">consu</field>
+            <field name="list_price">449.99</field>
+            <field name="standard_price">280.00</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record id="product_office_chair" model="product.product">
+            <field name="name">Ergonomic Office Chair</field>
+            <field name="type">consu</field>
+            <field name="list_price">599.00</field>
+            <field name="standard_price">350.00</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+        </record>
+    </data>
+</odoo>

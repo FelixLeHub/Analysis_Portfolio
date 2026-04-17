@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ═══ Quotation Form View ═══ -->
+    <record id="view_crm_lead_quotation_form" model="ir.ui.view">
+        <field name="name">crm.lead.quotation.form</field>
+        <field name="model">crm.lead.quotation</field>
+        <field name="arch" type="xml">
+            <form string="Lead Quotation">
+                <header>
+                    <button name="action_retrieve_rates" string="Retrieve Rates" type="object"
+                            class="oe_highlight" invisible="state not in ('draft', 'sent')" data-hotkey="r"/>
+                    <button name="action_send_quotation" string="Send" type="object"
+                            class="oe_highlight" invisible="state not in ('draft', 'sent')" data-hotkey="q"/>
+                    <button name="action_create_freight_job" string="Create Job" type="object"
+                            class="oe_highlight" invisible="state not in ('draft', 'sent')" data-hotkey="e"
+                            confirm="This will confirm the quotation and create a freight job. Continue?"/>
+                    <button name="action_preview" string="Preview" type="object"
+                            class="oe_highlight" invisible="state not in ('draft', 'sent')" data-hotkey="w"/>
+                    <button name="action_cancel" string="Rejected" type="object"
+                            class="btn-danger" invisible="state in ('confirmed', 'cancelled')" data-hotkey="x"/>
+                    <button name="action_reset_draft" string="Reset to Draft" type="object"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,sent,confirmed"/>
+                </header>
+                <sheet>
+                    <field name="previous_currency_id" invisible="1"/>
+                    <!-- Title + Info area -->
+                    <div class="d-flex justify-content-between align-items-start flex-wrap">
+                        <div class="flex-grow-1" style="max-width: 60%;">
+                            <h1 class="mb-0" style="font-size: 1.8rem;"><field name="name" readonly="1"/></h1>
+                            <div class="text-muted small mb-0">
+                                Lead: <field name="lead_id" class="oe_inline"
+                                             options="{'no_create': True}"/>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column gap-1 mt-1">
+                            <div class="d-flex align-items-center gap-2">
+                                <label for="currency_id" string="Currency:" class="fw-bold text-nowrap mb-0"/>
+                                <field name="currency_id" options="{'no_create': True, 'no_open': True}" class="w-auto"/>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <label for="stage_id" string="Lead Stage:" class="fw-bold text-nowrap mb-0"/>
+                                <field name="stage_id" class="w-auto" readonly="1"/>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold text-nowrap mb-0">Created:</span>
+                                <field name="create_date" class="w-auto" readonly="1"/>
+                            </div>
+                            <div class="d-flex align-items-center gap-2" invisible="not sent_date">
+                                <span class="fw-bold text-nowrap mb-0">Sent:</span>
+                                <field name="sent_date" class="w-auto" readonly="1"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Type + Expected Revenue -->
+                    <group>
+                        <group>
+                            <field name="freight_service_type_id" string="Service Type" required="1"/>
+                            <field name="freight_service_type" invisible="1"/>
+                            <field name="expected_revenue" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group/>
+                    </group>
+
+                    <!-- FCL: Shipment Details | Cargo Details -->
+                    <group invisible="freight_service_type != 'fcl'">
+                        <group string="Shipment Details">
+                            <field name="freight_incoterm" string="Incoterm"/>
+                            <field name="freight_direction_id" string="Direction"/>
+                            <field name="freight_pol_id" string="POL"/>
+                            <field name="freight_pod_id" string="POD"/>
+                            <field name="freight_tt_days" string="T/T (days)"/>
+                            <field name="freight_frequency" string="Frequency"/>
+                        </group>
+                        <group string="Cargo Details">
+                            <field name="freight_weight" string="Gross Weight (KGS)" widget="float"/>
+                            <field name="freight_volume" string="Volumn (CBM)" widget="float"/>
+                            <field name="freight_pallets" string="Pallets"/>
+                            <field name="freight_cargo" string="Cargo"/>
+                            <field name="freight_dimension" string="Dimension"/>
+                            <field name="freight_commodity" string="Commodity"/>
+                        </group>
+                    </group>
+
+                    <!-- Trucking: Shipment Details | Cargo Details -->
+                    <group invisible="freight_service_type != 'trucking'">
+                        <group string="Shipment Details">
+                            <field name="freight_incoterm" string="Incoterm"/>
+                            <field name="freight_direction_id" string="Direction"/>
+                            <field name="freight_pol_id" string="POL"/>
+                            <field name="freight_pod_id" string="POD"/>
+                            <field name="freight_tt_days" string="T/T (days)"/>
+                            <field name="freight_frequency" string="Freq"/>
+                            <field name="freight_ftl" string="FTL"/>
+                        </group>
+                        <group string="Cargo Details">
+                            <field name="freight_weight" string="Gross Weight (KGS)" widget="float"/>
+                            <field name="freight_volume" string="Volumn (CBM)" widget="float"/>
+                            <field name="freight_pallets" string="Pallets"/>
+                            <field name="freight_cargo" string="Cargo"/>
+                            <field name="freight_dimension" string="Dimension"/>
+                            <field name="freight_commodity" string="Commodity"/>
+                        </group>
+                    </group>
+
+                    <!-- Air: Shipment Details | Cargo Details -->
+                    <group invisible="freight_service_type != 'air'">
+                        <group string="Shipment Details">
+                            <field name="freight_incoterm" string="Incoterm"/>
+                            <field name="freight_direction_id" string="Direction"/>
+                            <field name="freight_pol_id" string="AOL"/>
+                            <field name="freight_pod_id" string="AOD"/>
+                            <field name="freight_carrier" string="Carrier"/>
+                            <field name="freight_tt_days" string="T/T (days)"/>
+                            <field name="freight_frequency" string="Freq"/>
+                        </group>
+                        <group string="Cargo Details">
+                            <field name="freight_weight" string="Gross Weight (KGS)" widget="float"/>
+                            <field name="freight_volume" string="Volumn (CBM)" widget="float"/>
+                            <field name="freight_pallets" string="Pallets"/>
+                            <field name="freight_cargo" string="Cargo"/>
+                            <field name="freight_dimension" string="Dimension"/>
+                            <field name="freight_commodity" string="Commodity"/>
+                        </group>
+                    </group>
+
+                    <!-- LCL: Shipment Details | Cargo Details (with weight breakpoints) -->
+                    <group invisible="freight_service_type != 'lcl'">
+                        <group string="Shipment Details">
+                            <field name="freight_incoterm" string="Incoterm"/>
+                            <field name="freight_direction_id" string="Direction"/>
+                            <field name="freight_pol_id" string="POL"/>
+                            <field name="freight_pod_id" string="POD"/>
+                            <field name="freight_tt_days" string="T/T (days)"/>
+                            <field name="freight_frequency" string="Frequency"/>
+                        </group>
+                        <group string="Cargo Details">
+                            <group>
+                                <field name="freight_weight" string="Gross Weight (KGS)" widget="float"/>
+                                <field name="freight_volume" string="Volumn (CBM)" widget="float"/>
+                                <field name="freight_pallets" string="Pallets"/>
+                                <field name="freight_cargo" string="Cargo"/>
+                                <field name="freight_dimension" string="Dimension"/>
+                                <field name="freight_commodity" string="Commodity"/>
+                            </group>
+                            <group>
+                                <field name="freight_cwt" string="CWT"/>
+                                <field name="freight_wb_100" string="100 LBS"/>
+                                <field name="freight_wb_800" string="800 LBS"/>
+                                <field name="freight_wb_1100" string="1100 LBS"/>
+                            </group>
+                        </group>
+                    </group>
+
+                    <!-- ═══ FCL SECTIONS ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'fcl'">1. Ocean Rate</div>
+                    <field name="ocean_rate_ids" nolabel="1" context="{'default_section': 'ocean_rate'}"
+                           invisible="freight_service_type != 'fcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'fcl'">2. Local Charge</div>
+                    <field name="local_charge_ids" nolabel="1" context="{'default_section': 'local_charge'}"
+                           invisible="freight_service_type != 'fcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'fcl'">3. Exw Fee</div>
+                    <field name="exw_fee_ids" nolabel="1" context="{'default_section': 'exw_fee'}"
+                           invisible="freight_service_type != 'fcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ LCL SECTIONS ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'lcl'">1. Rate for LCL shipment</div>
+                    <field name="lcl_rate_ids" nolabel="1" context="{'default_section': 'lcl_rate'}"
+                           invisible="freight_service_type != 'lcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'lcl'">2. Ex-work cost at the port of loading</div>
+                    <field name="lcl_exw_fee_ids" nolabel="1" context="{'default_section': 'lcl_exw_fee'}"
+                           invisible="freight_service_type != 'lcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'lcl'">3. LCL Local charge in HCM</div>
+                    <field name="lcl_local_charge_ids" nolabel="1" context="{'default_section': 'lcl_local_charge'}"
+                           invisible="freight_service_type != 'lcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'lcl'">4. FCL Local charge in HCM</div>
+                    <field name="fcl_local_charge_ids" nolabel="1" context="{'default_section': 'fcl_local_charge'}"
+                           invisible="freight_service_type != 'lcl'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ AIR SECTIONS ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'air'">1. Rate for airfreight</div>
+                    <field name="air_rate_ids" nolabel="1" context="{'default_section': 'air_rate'}"
+                           invisible="freight_service_type != 'air'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'air'">2. Ex-work at the airport of loading</div>
+                    <field name="air_local_charge_ids" nolabel="1" context="{'default_section': 'air_local_charge'}"
+                           invisible="freight_service_type != 'air'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'air'">3. Local charge at the airport of delivery</div>
+                    <field name="air_exw_fee_ids" nolabel="1" context="{'default_section': 'air_exw_fee'}"
+                           invisible="freight_service_type != 'air'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <!-- ═══ TRUCKING SECTIONS ═══ -->
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'trucking'">1. Trucking fee</div>
+                    <field name="trucking_rate_ids" nolabel="1" context="{'default_section': 'trucking_rate'}"
+                           invisible="freight_service_type != 'trucking'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'trucking' or freight_direction != 'export'">2. Customs fee for export shipment</div>
+                    <div class="fw-bold mt-3 mb-1" invisible="freight_service_type != 'trucking' or freight_direction != 'import'">2. Customs fee for Import shipment</div>
+                    <field name="trucking_surcharge_ids" nolabel="1" context="{'default_section': 'trucking_surcharge'}"
+                           invisible="freight_service_type != 'trucking'">
+                        <list editable="bottom">
+                            <field name="section" column_invisible="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="quantity" string="Quantity"/>
+                            <field name="rate" string="Rate"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="total" string="Total" readonly="1"/>
+                            <field name="note" string="Note"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+
+                    <!-- Grand Total -->
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="amount_total" widget="monetary"
+                               options="{'currency_field': 'currency_id'}"
+                               class="oe_subtotal_footer_separator"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ═══ Quotation List View ═══ -->
+    <record id="view_crm_lead_quotation_list" model="ir.ui.view">
+        <field name="name">crm.lead.quotation.list</field>
+        <field name="model">crm.lead.quotation</field>
+        <field name="arch" type="xml">
+            <list string="Lead Quotations">
+                <field name="name" string="Quotation ID"/>
+                <field name="lead_id" string="Lead"/>
+                <field name="partner_id" string="Customer"/>
+                <field name="freight_service_type_id" string="Service Type"/>
+                <field name="freight_pol_id" string="POL"/>
+                <field name="freight_pod_id" string="POD"/>
+                <field name="amount_total" string="Total" widget="monetary"/>
+                <field name="state" string="Status" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'sent'"
+                       decoration-success="state == 'confirmed'"
+                       decoration-danger="state == 'cancelled'"/>
+                <field name="currency_id" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ═══ Action: all quotations ═══ -->
+    <record id="action_crm_lead_quotation_list" model="ir.actions.act_window">
+        <field name="name">Quotations</field>
+        <field name="res_model">crm.lead.quotation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ═══ Override Sales > Quotations menu to show crm.lead.quotation ═══ -->
+    <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+        <field name="action" eval="'ir.actions.act_window,' + str(ref('action_crm_lead_quotation_list'))"/>
+    </record>
+</odoo>

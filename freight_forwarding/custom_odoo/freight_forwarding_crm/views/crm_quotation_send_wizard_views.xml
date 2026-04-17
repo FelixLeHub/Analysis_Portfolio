@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ═══ Send Quotation Wizard View ═══ -->
+    <record id="view_crm_quotation_send_wizard_form" model="ir.ui.view">
+        <field name="name">crm.quotation.send.wizard.form</field>
+        <field name="model">crm.quotation.send.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send Quotation">
+                <field name="quotation_id" invisible="1"/>
+                <field name="lead_id" invisible="1"/>
+                <field name="service_type" invisible="1"/>
+                <field name="show_additional" invisible="1"/>
+                <field name="additional_service_type" invisible="1"/>
+                <group>
+                    <field name="send_method" widget="radio"/>
+                    <field name="additional_quotation_id"
+                           string="Attach Additional Quotation"
+                           invisible="not show_additional"
+                           options="{'no_create': True}"/>
+                </group>
+
+                <!-- Email fields -->
+                <group string="Email Details" invisible="send_method != 'email'">
+                    <field name="email_to" string="To"/>
+                    <field name="email_subject" string="Subject"/>
+                </group>
+                <separator string="Message" invisible="send_method != 'email'"/>
+                <field name="email_body" widget="html" nolabel="1" invisible="send_method != 'email'"
+                       style="min-height: 200px;"/>
+                <separator string="Attachment" invisible="send_method != 'email'"/>
+                <field name="attachment_ids" widget="many2many_binary" nolabel="1" invisible="send_method != 'email'"/>
+
+                <!-- WhatsApp fields -->
+                <group string="WhatsApp Details" invisible="send_method != 'whatsapp'">
+                    <field name="whatsapp_number" string="WhatsApp Number"/>
+                </group>
+                <separator string="Message" invisible="send_method != 'whatsapp'"/>
+                <field name="whatsapp_message" widget="text" nolabel="1" invisible="send_method != 'whatsapp'"
+                       style="min-height: 200px;"/>
+                <separator string="Attachment" invisible="send_method != 'whatsapp'"/>
+                <field name="attachment_ids" widget="many2many_binary" nolabel="1" invisible="send_method != 'whatsapp'"/>
+
+                <footer>
+                    <button name="action_send" string="Send" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ═══ Send Quotation Wizard Action ═══ -->
+    <record id="action_crm_quotation_send_wizard" model="ir.actions.act_window">
+        <field name="name">Send Quotation</field>
+        <field name="res_model">crm.quotation.send.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

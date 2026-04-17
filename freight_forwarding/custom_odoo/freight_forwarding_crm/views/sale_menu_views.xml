@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Hide To Invoice -->
+    <record id="sale.menu_sale_invoicing" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- Hide Products -->
+    <record id="sale.product_menu_catalog" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>

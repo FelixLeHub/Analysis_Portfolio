@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Customers -->
+        <record id="partner_customer_1" model="res.partner">
+            <field name="name">Acme Corporation</field>
+            <field name="email">contact@acme.com</field>
+            <field name="phone">+1-555-0101</field>
+            <field name="street">123 Business Ave</field>
+            <field name="city">New York</field>
+            <field name="zip">10001</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_2" model="res.partner">
+            <field name="name">Global Tech Solutions</field>
+            <field name="email">info@globaltech.com</field>
+            <field name="phone">+1-555-0102</field>
+            <field name="street">456 Innovation Blvd</field>
+            <field name="city">San Francisco</field>
+            <field name="zip">94105</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="partner_customer_3" model="res.partner">
+            <field name="name">Prime Industries Ltd</field>
+            <field name="email">sales@primeindustries.com</field>
+            <field name="phone">+44-20-7946-0958</field>
+            <field name="street">78 King's Road</field>
+            <field name="city">London</field>
+            <field name="zip">SW1A 1AA</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <!-- Suppliers -->
+        <record id="partner_supplier_1" model="res.partner">
+            <field name="name">Office Supplies Co.</field>
+            <field name="email">orders@officesupplies.com</field>
+            <field name="phone">+1-555-0201</field>
+            <field name="street">789 Supply Chain Dr</field>
+            <field name="city">Chicago</field>
+            <field name="zip">60601</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_supplier_2" model="res.partner">
+            <field name="name">TechParts International</field>
+            <field name="email">vendor@techparts.com</field>
+            <field name="phone">+49-30-1234567</field>
+            <field name="street">12 Berliner Str.</field>
+            <field name="city">Berlin</field>
+            <field name="zip">10115</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="supplier_rank">1</field>
+        </record>
+
+        <record id="partner_supplier_3" model="res.partner">
+            <field name="name">Raw Materials Inc.</field>
+            <field name="email">supply@rawmaterials.com</field>
+            <field name="phone">+1-555-0203</field>
+            <field name="street">321 Industrial Park</field>
+            <field name="city">Houston</field>
+            <field name="zip">77001</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="supplier_rank">1</field>
+        </record>
+        <!-- Freight / Logistics Companies (Vietnam & Asia region) -->
+        <record id="partner_freight_1" model="res.partner">
+            <field name="name">Viet Star Logistics Co., Ltd</field>
+            <field name="email">ops@vietstarlogistics.vn</field>
+            <field name="phone">+84-28-3820-1234</field>
+            <field name="street">12 Nguyen Hue Blvd</field>
+            <field name="city">Ho Chi Minh City</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="comment">Sea FCL/LCL agent — HCMC port</field>
+        </record>
+
+        <record id="partner_freight_2" model="res.partner">
+            <field name="name">Seoul Express Forwarding Ltd</field>
+            <field name="email">export@seoulexpress.co.kr</field>
+            <field name="phone">+82-2-7788-9900</field>
+            <field name="street">88 Teheran-ro, Gangnam-gu</field>
+            <field name="city">Seoul</field>
+            <field name="country_id" ref="base.kr"/>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="comment">Korean NVOCC partner — FCL Korea/Vietnam lane</field>
+        </record>
+
+        <record id="partner_freight_3" model="res.partner">
+            <field name="name">Shanghai Dragon Cargo Co.</field>
+            <field name="email">booking@dragoncargosha.com</field>
+            <field name="phone">+86-21-6310-8800</field>
+            <field name="street">500 Yangshupu Road, Yangpu</field>
+            <field name="city">Shanghai</field>
+            <field name="country_id" ref="base.cn"/>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="comment">China co-loader — LCL consolidation Shanghai/HCMC</field>
+        </record>
+
+        <record id="partner_freight_4" model="res.partner">
+            <field name="name">Japan Freight Services K.K.</field>
+            <field name="email">ocean@jfs-logistics.co.jp</field>
+            <field name="phone">+81-3-5678-4321</field>
+            <field name="street">2-3-1 Marunouchi, Chiyoda-ku</field>
+            <field name="city">Tokyo</field>
+            <field name="country_id" ref="base.jp"/>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="comment">Japanese agent — air and sea import/export</field>
+        </record>
+
+        <record id="partner_freight_5" model="res.partner">
+            <field name="name">Pacific Rim Shipping Inc.</field>
+            <field name="email">pricing@pacificrimship.com</field>
+            <field name="phone">+1-310-555-7700</field>
+            <field name="street">1500 Harbor Blvd</field>
+            <field name="city">Los Angeles</field>
+            <field name="zip">90731</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="customer_rank">1</field>
+            <field name="comment">US importer — trans-Pacific FCL customer</field>
+        </record>
+
+        <record id="partner_freight_6" model="res.partner">
+            <field name="name">Hanoi Trade and Transport JSC</field>
+            <field name="email">info@hanoitrade.vn</field>
+            <field name="phone">+84-24-3936-5500</field>
+            <field name="street">45 Ba Trieu Street, Hoan Kiem</field>
+            <field name="city">Hanoi</field>
+            <field name="country_id" ref="base.vn"/>
+            <field name="customer_rank">1</field>
+            <field name="comment">Northern Vietnam customer — trucking and customs clearance</field>
+        </record>
+
+        <record id="partner_freight_7" model="res.partner">
+            <field name="name">Euro Cargo GmbH</field>
+            <field name="email">sea@eurocargo.de</field>
+            <field name="phone">+49-40-3690-1122</field>
+            <field name="street">Ballindamm 17</field>
+            <field name="city">Hamburg</field>
+            <field name="zip">20095</field>
+            <field name="country_id" ref="base.de"/>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="comment">European NVOCC — EU/Asia lane partner</field>
+        </record>
+
+        <record id="partner_freight_8" model="res.partner">
+            <field name="name">Singapore Hub Logistics Pte Ltd</field>
+            <field name="email">hub@sghublogistics.com.sg</field>
+            <field name="phone">+65-6225-8833</field>
+            <field name="street">3 Harbourfront Place</field>
+            <field name="city">Singapore</field>
+            <field name="zip">098633</field>
+            <field name="country_id" ref="base.sg"/>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">1</field>
+            <field name="comment">Singapore transhipment hub agent</field>
+        </record>
+    </data>
+</odoo>

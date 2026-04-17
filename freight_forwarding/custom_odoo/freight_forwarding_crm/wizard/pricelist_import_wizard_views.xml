@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pricelist_import_wizard_form" model="ir.ui.view">
+        <field name="name">freight.pricelist.import.wizard.form</field>
+        <field name="model">freight.pricelist.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import to Quotation">
+                <group>
+                    <field name="pricelist_id" invisible="1"/>
+                    <field name="pricelist_service_code" invisible="1"/>
+                    <field name="pricelist_lead_id" invisible="1"/>
+                    <field name="pricelist_pol_id" invisible="1"/>
+                    <field name="pricelist_pod_id" invisible="1"/>
+                    <field name="quotation_id" options="{'no_create': True, 'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="action_import" type="object"
+                            string="Import Rates" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Add Import button to freight pricelist form -->
+    <record id="view_freight_pricelist_form_import" model="ir.ui.view">
+        <field name="name">master.freight.pricelist.form.import</field>
+        <field name="model">master.freight.pricelist</field>
+        <field name="inherit_id" ref="freight_forwarding_master_data.view_freight_pricelist_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_open_import_wizard" type="object"
+                            string="Import to Quotation" class="oe_highlight"/>
+                    <button name="action_open_rates_import_wizard" type="object"
+                            string="Upload Rates" class="oe_highlight"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>

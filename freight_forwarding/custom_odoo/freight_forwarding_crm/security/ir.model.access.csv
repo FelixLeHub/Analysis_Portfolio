@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_lead_quotation_user,crm.lead.quotation.user,model_crm_lead_quotation,sales_team.group_sale_salesman,1,1,1,0
+access_crm_lead_quotation_manager,crm.lead.quotation.manager,model_crm_lead_quotation,sales_team.group_sale_manager,1,1,1,1
+access_crm_lead_quotation_line_user,crm.lead.quotation.line.user,model_crm_lead_quotation_line,sales_team.group_sale_salesman,1,1,1,0
+access_crm_lead_quotation_line_manager,crm.lead.quotation.line.manager,model_crm_lead_quotation_line,sales_team.group_sale_manager,1,1,1,1
+access_crm_quotation_send_wizard_user,crm.quotation.send.wizard.user,model_crm_quotation_send_wizard,sales_team.group_sale_salesman,1,1,1,1
+access_crm_quotation_send_wizard_manager,crm.quotation.send.wizard.manager,model_crm_quotation_send_wizard,sales_team.group_sale_manager,1,1,1,1
+access_pricelist_import_wizard_user,freight.pricelist.import.wizard.user,model_freight_pricelist_import_wizard,base.group_user,1,1,1,1
+access_pricelist_rates_import_wizard_user,freight.pricelist.rates.import.wizard.user,model_freight_pricelist_rates_import_wizard,base.group_user,1,1,1,1

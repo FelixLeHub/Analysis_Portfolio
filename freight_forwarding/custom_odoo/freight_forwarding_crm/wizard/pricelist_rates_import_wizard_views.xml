@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pricelist_rates_import_wizard_form" model="ir.ui.view">
+        <field name="name">freight.pricelist.rates.import.wizard.form</field>
+        <field name="model">freight.pricelist.rates.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Rates">
+                <group>
+                    <field name="pricelist_id" invisible="1"/>
+                    <field name="service_type_code" invisible="1"/>
+                    <field name="import_file" filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+                <div class="alert alert-info" role="alert">
+                    <p>Upload an Excel file (.xlsx) with columns matching the rate fields
+                       for the current service type. Existing rate lines will be replaced.</p>
+                    <p>PDF and image import via AI OCR is coming soon.</p>
+                </div>
+                <footer>
+                    <button name="action_import_rates" type="object"
+                            string="Import" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

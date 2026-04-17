@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_logistics_customer_debit_note_list" model="ir.ui.view">
+        <field name="name">logistics.customer.debit.note.list</field>
+        <field name="model">logistics.customer.debit.note</field>
+        <field name="arch" type="xml">
+            <list string="Customer Debit Notes" decoration-muted="state == 'draft'">
+                <field name="name"/>
+                <field name="job_id"/>
+                <field name="customer_id"/>
+                <field name="issue_date"/>
+                <field name="currency_id"/>
+                <field name="total_amount"/>
+                <field name="prepared_by" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state in ('confirmed', 'sent')"
+                       decoration-success="state == 'paid'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_logistics_customer_debit_note_form" model="ir.ui.view">
+        <field name="name">logistics.customer.debit.note.form</field>
+        <field name="model">logistics.customer.debit.note</field>
+        <field name="arch" type="xml">
+            <form string="Customer Debit Note">
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_send" type="object" string="Mark Sent"
+                            class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_paid" type="object" string="Mark Paid"
+                            class="oe_highlight" invisible="state != 'sent'"/>
+                    <button name="action_draft" type="object" string="Reset to Draft"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,sent,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Reference">
+                            <field name="job_id"/>
+                            <field name="customer_id"/>
+                            <field name="contact_person"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group string="Issue">
+                            <field name="issue_date"/>
+                            <field name="prepared_by"/>
+                            <field name="total_amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Shipment">
+                            <field name="service_type"/>
+                            <field name="mbl_no" string="M-B/L No." invisible="not mbl_no"/>
+                            <field name="hbl_no" string="HBL / HAWB No" invisible="not hbl_no"/>
+                            <field name="mawb_no" string="M-AWB No." invisible="not mawb_no"/>
+                            <field name="hawb_no" string="HBL / HAWB No" invisible="not hawb_no"/>
+                            <field name="vessel_name" invisible="not vessel_name"/>
+                            <field name="volume_cbm" string="TR Volume"/>
+                            <field name="package_count" string="Q'ty"/>
+                        </group>
+                        <group string="Routing">
+                            <field name="pol"/>
+                            <field name="pod"/>
+                            <field name="etd"/>
+                            <field name="eta"/>
+                            <field name="consignee_id"/>
+                        </group>
+                    </group>
+                    <separator string="Charge Lines"/>
+                    <field name="line_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="name" string="Description"/>
+                            <field name="quantity" string="Q'ty"/>
+                            <field name="unit" string="Unit"/>
+                            <field name="unit_price" string="Price"/>
+                            <field name="vat_percent" string="VAT %"/>
+                            <field name="currency_id" string="Curr."/>
+                            <field name="amount_debit" string="Debit"/>
+                            <field name="amount_credit" string="Credit"/>
+                            <field name="secondary_currency_id" optional="hide"/>
+                            <field name="secondary_amount_debit" string="Sec. Debit" optional="hide"/>
+                            <field name="secondary_amount_credit" string="Sec. Credit" optional="hide"/>
+                            <field name="implied_exchange_rate" optional="hide"/>
+                        </list>
+                    </field>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+                <chatter reload_on_follower="True"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_logistics_customer_debit_note" model="ir.actions.act_window">
+        <field name="name">Customer Debit Notes</field>
+        <field name="res_model">logistics.customer.debit.note</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

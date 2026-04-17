@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Trucking and customs quotation -->
+        <record id="quotation_job_trucking_customs" model="logistics.job">
+            <field name="name">UAT/QTN/TRK/001</field>
+            <field name="service_type">trucking</field>
+            <field name="quotation_layout">trucking_customs</field>
+            <field name="state">quotation</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_trucking"/>
+            <field name="customer_ref">NDBD-TRK</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_trucking"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_trucking"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_trucking"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_trucking"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_trucking"/>
+            <field name="subject">Quotation for trucking and customs service from Cat Lai to Binh Duong</field>
+            <field name="attention_to">MR. PHAT</field>
+            <field name="pic_name">Lan Anh</field>
+            <field name="valid_until">2026-04-30</field>
+            <field name="pol">CAT LAI PORT</field>
+            <field name="pod">BINH DUONG</field>
+            <field name="place_of_delivery">Aeon Distribution Center</field>
+            <field name="commodity">Home decoration and furniture accessories</field>
+            <field name="package_count">18</field>
+            <field name="gross_weight">8200</field>
+            <field name="volume_cbm">28</field>
+            <field name="volume_summary">1 x 20DC / 18 pallets / home decoration items</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="vat_percent">8.0</field>
+            <field name="quotation_intro">Thank you for your inquiry. Please find our trucking and customs quotation for the Cat Lai to Binh Duong delivery lane below.</field>
+            <field name="quotation_footer_note">Rates exclude customs inspection, storage, demurrage, and any surcharge imposed by port or customs authorities.</field>
+            <field name="salesperson_name">Nguyen Ha</field>
+            <field name="salesperson_email">ha.nguyen@freight_forwarding-logistics.test</field>
+            <field name="salesperson_phone">+84-909-100-101</field>
+            <field name="notes">Use this quotation to review the trucking and customs layout in the quotation form.</field>
+        </record>
+
+        <record id="quotation_job_trucking_rate_1" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_trucking_customs"/>
+            <field name="section_code">truck_rate</field>
+            <field name="sequence">10</field>
+            <field name="name">Cat Lai Port</field>
+            <field name="destination_code">Thu Dau Mot</field>
+            <field name="amount_1">95</field>
+            <field name="amount_2">115</field>
+            <field name="amount_3">145</field>
+            <field name="amount_4">185</field>
+            <field name="amount_5">265</field>
+        </record>
+
+        <record id="quotation_job_trucking_rate_2" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_trucking_customs"/>
+            <field name="section_code">truck_rate</field>
+            <field name="sequence">20</field>
+            <field name="name">Song Than ICD</field>
+            <field name="destination_code">Di An</field>
+            <field name="amount_1">75</field>
+            <field name="amount_2">95</field>
+            <field name="amount_3">125</field>
+            <field name="amount_4">160</field>
+            <field name="amount_5">235</field>
+        </record>
+
+        <record id="quotation_job_trucking_customs_import_1" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_trucking_customs"/>
+            <field name="section_code">customs_import</field>
+            <field name="sequence">30</field>
+            <field name="name">Consumer goods</field>
+            <field name="destination_code">Binh Duong</field>
+            <field name="amount_1">45</field>
+            <field name="amount_2">60</field>
+            <field name="amount_3">75</field>
+            <field name="amount_4">120</field>
+            <field name="amount_5">150</field>
+        </record>
+
+        <record id="quotation_job_trucking_customs_import_2" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_trucking_customs"/>
+            <field name="section_code">customs_import</field>
+            <field name="sequence">40</field>
+            <field name="name">Home decoration</field>
+            <field name="destination_code">Ho Chi Minh City</field>
+            <field name="amount_1">40</field>
+            <field name="amount_2">55</field>
+            <field name="amount_3">70</field>
+            <field name="amount_4">110</field>
+            <field name="amount_5">140</field>
+        </record>
+
+        <record id="quotation_job_trucking_customs_export_1" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_trucking_customs"/>
+            <field name="section_code">customs_export</field>
+            <field name="sequence">50</field>
+            <field name="name">Textile / normal cargo</field>
+            <field name="carrier_or_party">Direct shipper</field>
+            <field name="amount_1">38</field>
+            <field name="amount_2">52</field>
+            <field name="amount_3">66</field>
+            <field name="amount_4">90</field>
+            <field name="amount_5">118</field>
+        </record>
+
+        <record id="quotation_job_trucking_customs_export_2" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_trucking_customs"/>
+            <field name="section_code">customs_export</field>
+            <field name="sequence">60</field>
+            <field name="name">Wooden products</field>
+            <field name="carrier_or_party">Factory stuffing</field>
+            <field name="amount_1">42</field>
+            <field name="amount_2">58</field>
+            <field name="amount_3">72</field>
+            <field name="amount_4">98</field>
+            <field name="amount_5">126</field>
+        </record>
+
+        <!-- Sea LCL quotation -->
+        <record id="quotation_job_sea_lcl" model="logistics.job">
+            <field name="name">UAT/QTN/LCL/001</field>
+            <field name="service_type">sea_lcl</field>
+            <field name="quotation_layout">sea_lcl</field>
+            <field name="state">quotation</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_zippers"/>
+            <field name="customer_ref">HELA-LCL</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_smooth"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_lcl"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_lcl"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_smooth"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_cosco"/>
+            <field name="subject">LCL rate quotation from Shanghai and Bangkok to Phnom Penh</field>
+            <field name="attention_to">MR. LONG</field>
+            <field name="pic_name">Thanh</field>
+            <field name="valid_until">2026-05-05</field>
+            <field name="pol">SHANGHAI</field>
+            <field name="pod">PHNOM PENH</field>
+            <field name="place_of_delivery">Canadia ICD</field>
+            <field name="commodity">Garment accessories</field>
+            <field name="package_count">128</field>
+            <field name="gross_weight">1240</field>
+            <field name="volume_cbm">3.2</field>
+            <field name="volume_summary">3.2 CBM / 1,240 KGS / 128 cartons</field>
+            <field name="freight_terms">prepaid</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="vat_percent">8.0</field>
+            <field name="quotation_intro">Please find our updated LCL quotation below for the Cambodia lane, including origin handling and destination local charges.</field>
+            <field name="quotation_footer_note">Rates are based on current sailing schedules and are subject to space availability, customs inspection, and destination storage if any.</field>
+            <field name="salesperson_name">Tran Minh</field>
+            <field name="salesperson_email">minh.tran@freight_forwarding-logistics.test</field>
+            <field name="salesperson_phone">+84-909-100-102</field>
+            <field name="notes">Use this quotation to review the LCL rate and local charge sections in the quotation form.</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_rate_1" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_rate</field>
+            <field name="sequence">10</field>
+            <field name="name">China</field>
+            <field name="origin_code">SHA</field>
+            <field name="destination_code">PNH</field>
+            <field name="amount_1">28</field>
+            <field name="amount_2">10</field>
+            <field name="amount_3">12</field>
+            <field name="amount_4">4</field>
+            <field name="amount_5">3</field>
+            <field name="amount_6">5</field>
+            <field name="transit_time">7-8 days</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_rate_2" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_rate</field>
+            <field name="sequence">20</field>
+            <field name="name">Thailand</field>
+            <field name="origin_code">BKK</field>
+            <field name="destination_code">PNH</field>
+            <field name="amount_1">24</field>
+            <field name="amount_2">9</field>
+            <field name="amount_3">11</field>
+            <field name="amount_4">3</field>
+            <field name="amount_5">3</field>
+            <field name="amount_6">4</field>
+            <field name="transit_time">4-5 days</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_exwork_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_exwork</field>
+            <field name="sequence">30</field>
+            <field name="name">Cargo receiving at origin warehouse</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">25</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_exwork_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_exwork</field>
+            <field name="sequence">40</field>
+            <field name="name">Export customs clearance</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">32</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_local_fcl_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_local_fcl</field>
+            <field name="sequence">50</field>
+            <field name="name">THC at POD</field>
+            <field name="amount_20dc">140</field>
+            <field name="amount_40hc">220</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_local_fcl_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_local_fcl</field>
+            <field name="sequence">60</field>
+            <field name="name">D/O fee</field>
+            <field name="amount_20dc">35</field>
+            <field name="amount_40hc">35</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_local_lcl_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_local_lcl</field>
+            <field name="sequence">70</field>
+            <field name="name">CFS handling</field>
+            <field name="unit_description">USD / RT</field>
+            <field name="amount">18</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_lcl_local_lcl_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_lcl"/>
+            <field name="section_code">lcl_local_lcl</field>
+            <field name="sequence">80</field>
+            <field name="name">D/O fee</field>
+            <field name="unit_description">USD / HBL</field>
+            <field name="amount">22</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <!-- Sea FCL quotation -->
+        <record id="quotation_job_sea_fcl" model="logistics.job">
+            <field name="name">UAT/QTN/FCL/001</field>
+            <field name="service_type">sea_fcl_export</field>
+            <field name="quotation_layout">sea_fcl</field>
+            <field name="state">quotation</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_furniture"/>
+            <field name="customer_ref">TA-HCM</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_theodore_hcm"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_brigths"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_export"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_atlas"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_line_maersk"/>
+            <field name="subject">Seafreight quotation from Ho Chi Minh City to Southampton</field>
+            <field name="attention_to">MS. HOA</field>
+            <field name="pic_name">Khanh</field>
+            <field name="valid_until">2026-05-10</field>
+            <field name="pol">HO CHI MINH CITY</field>
+            <field name="pod">SOUTHAMPTON</field>
+            <field name="place_of_delivery">RG9 5DD</field>
+            <field name="commodity">Wooden furniture</field>
+            <field name="package_count">36</field>
+            <field name="gross_weight">2160</field>
+            <field name="volume_cbm">34.8</field>
+            <field name="volume_summary">2 x 40HC / FOB Cat Lai / 34.8 CBM</field>
+            <field name="routing_summary">Weekly service via Singapore, transit time 26-28 days.</field>
+            <field name="freight_terms">collect</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="vat_percent">8.0</field>
+            <field name="quotation_intro">Please find our latest ocean freight quotation below for your export shipment to the UK, including local charges at origin and ex-work fees.</field>
+            <field name="quotation_footer_note">Rates exclude customs inspection, VGM discrepancies, and any destination surcharges requested by the carrier after booking confirmation.</field>
+            <field name="salesperson_name">Pham Thao</field>
+            <field name="salesperson_email">thao.pham@freight_forwarding-logistics.test</field>
+            <field name="salesperson_phone">+84-909-100-103</field>
+            <field name="notes">Use this quotation to review the FCL rate, local charge, and total summary sections in the quotation form.</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_rate_1" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_ocean</field>
+            <field name="sequence">10</field>
+            <field name="name">Southampton lane via Singapore</field>
+            <field name="origin_code">SGN</field>
+            <field name="destination_code">SOU</field>
+            <field name="carrier_or_party">Maersk</field>
+            <field name="amount_1">980</field>
+            <field name="amount_2">1480</field>
+            <field name="transit_time">28 days</field>
+            <field name="frequency">Weekly</field>
+            <field name="note">Via Singapore</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_rate_2" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_ocean</field>
+            <field name="sequence">20</field>
+            <field name="name">Southampton premium space</field>
+            <field name="origin_code">SGN</field>
+            <field name="destination_code">SOU</field>
+            <field name="carrier_or_party">ONE</field>
+            <field name="amount_1">1020</field>
+            <field name="amount_2">1525</field>
+            <field name="transit_time">26 days</field>
+            <field name="frequency">Weekly</field>
+            <field name="note">Direct transshipment</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_local_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_local</field>
+            <field name="sequence">30</field>
+            <field name="name">THC</field>
+            <field name="unit_description">USD / ctr</field>
+            <field name="amount_20dc">145</field>
+            <field name="amount_40hc">230</field>
+            <field name="include_in_total">1</field>
+            <field name="remark">Subject to VGM declaration.</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_local_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_local</field>
+            <field name="sequence">40</field>
+            <field name="name">Documentation fee</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount_20dc">45</field>
+            <field name="amount_40hc">45</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_local_3" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_local</field>
+            <field name="sequence">50</field>
+            <field name="name">Seal fee</field>
+            <field name="unit_description">USD / ctr</field>
+            <field name="amount_20dc">8</field>
+            <field name="amount_40hc">8</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_exwork_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_exwork</field>
+            <field name="sequence">60</field>
+            <field name="name">Trucking from factory to port</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">120</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_exwork_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_exwork</field>
+            <field name="sequence">70</field>
+            <field name="name">Export customs clearance</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">65</field>
+            <field name="include_in_total">1</field>
+        </record>
+
+        <record id="quotation_job_sea_fcl_exwork_3" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_sea_fcl"/>
+            <field name="section_code">fcl_exwork</field>
+            <field name="sequence">80</field>
+            <field name="name">Fumigation if required</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">45</field>
+            <field name="include_in_total">0</field>
+        </record>
+
+        <!-- Air quotation -->
+        <record id="quotation_job_air" model="logistics.job">
+            <field name="name">UAT/QTN/AIR/001</field>
+            <field name="service_type">air</field>
+            <field name="quotation_layout">air</field>
+            <field name="state">quotation</field>
+            <field name="customer_id" ref="freight_forwarding_freight_uat.partner_customer_air"/>
+            <field name="customer_ref">TEX-AIR</field>
+            <field name="shipper_id" ref="freight_forwarding_freight_uat.partner_shipper_air"/>
+            <field name="consignee_id" ref="freight_forwarding_freight_uat.partner_consignee_air"/>
+            <field name="notify_party_id" ref="freight_forwarding_freight_uat.partner_notify_air"/>
+            <field name="agent_id" ref="freight_forwarding_freight_uat.partner_agent_acp"/>
+            <field name="shipping_line_id" ref="freight_forwarding_freight_uat.partner_airline_ana"/>
+            <field name="subject">Airfreight quotation from Ho Chi Minh City to Tokyo and Osaka</field>
+            <field name="attention_to">MS. MAI</field>
+            <field name="pic_name">Quynh</field>
+            <field name="valid_until">2026-04-25</field>
+            <field name="pol">SGN</field>
+            <field name="pod">NRT</field>
+            <field name="commodity">Electronics spare parts</field>
+            <field name="package_count">112</field>
+            <field name="gross_weight">625</field>
+            <field name="chargeable_weight">680</field>
+            <field name="volume_cbm">4.5</field>
+            <field name="volume_summary">680 chargeable kgs / 112 cartons / electronics spare parts</field>
+            <field name="incoterms">FCA Ho Chi Minh City</field>
+            <field name="currency_id" ref="base.USD"/>
+            <field name="exchange_rate">1.0000</field>
+            <field name="vat_percent">8.0</field>
+            <field name="quotation_intro">Please find our airfreight quotation below for your urgent Japan shipments, including origin and destination handling charges.</field>
+            <field name="quotation_footer_note">Rates are subject to airline security screening, actual chargeable weight at acceptance, and space availability on booking date.</field>
+            <field name="salesperson_name">Le Quynh</field>
+            <field name="salesperson_email">quynh.le@freight_forwarding-logistics.test</field>
+            <field name="salesperson_phone">+84-909-100-104</field>
+            <field name="notes">Use this quotation to review the air rate layout and airport charges in the quotation form.</field>
+        </record>
+
+        <record id="quotation_job_air_rate_1" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_air"/>
+            <field name="section_code">air_rate</field>
+            <field name="sequence">10</field>
+            <field name="name">Tokyo express</field>
+            <field name="origin_code">SGN</field>
+            <field name="destination_code">NRT</field>
+            <field name="carrier_or_party">NH</field>
+            <field name="amount_1">5.2</field>
+            <field name="amount_2">4.4</field>
+            <field name="amount_3">4.1</field>
+            <field name="amount_4">3.9</field>
+            <field name="amount_5">3.7</field>
+            <field name="amount_6">3.5</field>
+            <field name="note">MIN 120</field>
+            <field name="transit_time">1 day</field>
+        </record>
+
+        <record id="quotation_job_air_rate_2" model="logistics.job.quote.rate.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_air"/>
+            <field name="section_code">air_rate</field>
+            <field name="sequence">20</field>
+            <field name="name">Osaka consol</field>
+            <field name="origin_code">SGN</field>
+            <field name="destination_code">KIX</field>
+            <field name="carrier_or_party">JL</field>
+            <field name="amount_1">5.0</field>
+            <field name="amount_2">4.3</field>
+            <field name="amount_3">4.0</field>
+            <field name="amount_4">3.8</field>
+            <field name="amount_5">3.6</field>
+            <field name="amount_6">3.4</field>
+            <field name="note">MIN 115</field>
+            <field name="transit_time">1-2 days</field>
+        </record>
+
+        <record id="quotation_job_air_exwork_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_air"/>
+            <field name="section_code">air_exwork</field>
+            <field name="sequence">30</field>
+            <field name="name">Security screening</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">38</field>
+        </record>
+
+        <record id="quotation_job_air_exwork_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_air"/>
+            <field name="section_code">air_exwork</field>
+            <field name="sequence">40</field>
+            <field name="name">Export customs clearance</field>
+            <field name="unit_description">USD / shipment</field>
+            <field name="amount">42</field>
+        </record>
+
+        <record id="quotation_job_air_local_1" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_air"/>
+            <field name="section_code">air_local</field>
+            <field name="sequence">50</field>
+            <field name="name">Terminal handling</field>
+            <field name="amount">35</field>
+        </record>
+
+        <record id="quotation_job_air_local_2" model="logistics.job.quote.charge.line">
+            <field name="job_id" ref="freight_forwarding_freight_uat.quotation_job_air"/>
+            <field name="section_code">air_local</field>
+            <field name="sequence">60</field>
+            <field name="name">D/O fee</field>
+            <field name="amount">28</field>
+        </record>
+    </data>
+</odoo>

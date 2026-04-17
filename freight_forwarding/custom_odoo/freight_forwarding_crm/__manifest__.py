@@ -1,0 +1,31 @@
+{
+    'name': 'Freight_Forwarding CRM Freight Pipeline',
+    'version': '19.0.1.2.0',
+    'author': 'Freight_Forwarding Logistics',
+    'depends': ['crm', 'crm_iap_mine', 'crm_iap_enrich', 'sale_crm', 'mail', 'freight_forwarding_freight'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/crm_lead_sequence.xml',
+        'data/crm_lead_quotation_sequence.xml',
+        'data/crm_stage_data.xml',
+        'data/email_template_lead_request_info.xml',
+        'report/crm_lead_quotation_report.xml',
+        'wizard/pricelist_import_wizard_views.xml',
+        'wizard/pricelist_rates_import_wizard_views.xml',
+        'views/crm_quotation_send_wizard_views.xml',
+        'views/crm_lead_quotation_views.xml',
+        'views/sale_order_views.xml',
+        'views/crm_lead_views.xml',
+        'views/crm_menu_views.xml',
+        'views/sale_menu_views.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'freight_forwarding_crm/static/src/xml/crm_kanban_templates.xml',
+            'freight_forwarding_crm/static/src/js/crm_kanban_popup.js',
+            'freight_forwarding_crm/static/src/scss/crm_lead_kanban.scss',
+        ],
+    },
+    'installable': True,
+    'license': 'LGPL-3',
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_freight_forwarding_home_dashboard" model="ir.actions.client">
+        <field name="name">Home</field>
+        <field name="tag">freight_forwarding_home.dashboard</field>
+    </record>
+
+    <menuitem id="menu_freight_forwarding_home_root"
+              name="Home"
+              action="action_freight_forwarding_home_dashboard"
+              sequence="1"
+              web_icon="freight_forwarding_home,static/src/img/icon.png"/>
+</odoo>

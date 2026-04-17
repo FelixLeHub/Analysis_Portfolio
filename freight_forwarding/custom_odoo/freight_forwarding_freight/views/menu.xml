@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_freight_forwarding_freight_root"
+              name="Freight Management"
+              sequence="10"/>
+
+    <menuitem id="menu_freight_forwarding_freight_quotation"
+              name="Quotations"
+              parent="menu_freight_forwarding_freight_root"
+              sequence="10"/>
+
+    <menuitem id="menu_logistics_job_quotation"
+              name="All Quotations"
+              parent="menu_freight_forwarding_freight_quotation"
+              action="action_logistics_job_quotation"
+              sequence="10"/>
+
+    <menuitem id="menu_logistics_job_quotation_trucking_customs"
+              name="Trucking and Customs"
+              parent="menu_freight_forwarding_freight_quotation"
+              action="action_logistics_job_quotation_trucking_customs"
+              sequence="20"/>
+
+    <menuitem id="menu_logistics_job_quotation_sea_lcl"
+              name="LCL Rate"
+              parent="menu_freight_forwarding_freight_quotation"
+              action="action_logistics_job_quotation_sea_lcl"
+              sequence="30"/>
+
+    <menuitem id="menu_logistics_job_quotation_sea_fcl"
+              name="Seafreight"
+              parent="menu_freight_forwarding_freight_quotation"
+              action="action_logistics_job_quotation_sea_fcl"
+              sequence="40"/>
+
+    <menuitem id="menu_logistics_job_quotation_air"
+              name="Airfreight"
+              parent="menu_freight_forwarding_freight_quotation"
+              action="action_logistics_job_quotation_air"
+              sequence="50"/>
+
+    <record id="menu_logistics_job_quotation_sea_fcl_import" model="ir.ui.menu">
+        <field name="name">Sea FCL Import</field>
+        <field name="parent_id" ref="menu_freight_forwarding_freight_quotation"/>
+        <field name="action" ref="action_logistics_job_quotation_sea_fcl_import"/>
+        <field name="sequence">41</field>
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="menu_logistics_job_quotation_sea_fcl_export" model="ir.ui.menu">
+        <field name="name">Sea FCL Export</field>
+        <field name="parent_id" ref="menu_freight_forwarding_freight_quotation"/>
+        <field name="action" ref="action_logistics_job_quotation_sea_fcl_export"/>
+        <field name="sequence">42</field>
+        <field name="active" eval="False"/>
+    </record>
+
+    <menuitem id="menu_freight_forwarding_freight_operations"
+              name="Operations"
+              parent="menu_freight_forwarding_freight_root"
+              sequence="20"/>
+
+    <menuitem id="menu_logistics_job"
+              name="Jobs"
+              parent="menu_freight_forwarding_freight_operations"
+              action="action_logistics_job"
+              sequence="10"/>
+
+    <menuitem id="menu_logistics_agent_debit_note"
+              name="Agent Debit Notes"
+              parent="menu_freight_forwarding_freight_operations"
+              action="action_logistics_agent_debit_note"
+              sequence="20"/>
+
+    <menuitem id="menu_logistics_customer_debit_note"
+              name="Customer Debit Notes"
+              parent="menu_freight_forwarding_freight_operations"
+              action="action_logistics_customer_debit_note"
+              sequence="30"/>
+
+    <menuitem id="menu_freight_forwarding_freight_configuration"
+              name="Configuration"
+              parent="menu_freight_forwarding_freight_root"
+              sequence="90"/>
+
+    <menuitem id="menu_logistics_charge_type"
+              name="Charge Types"
+              parent="menu_freight_forwarding_freight_configuration"
+              action="action_logistics_charge_type"
+              sequence="10"/>
+
+</odoo>

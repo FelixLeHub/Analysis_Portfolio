@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. New Lead (reuse built-in stage_lead1) -->
+    <function model="crm.stage" name="write">
+        <value eval="[ref('crm.stage_lead1')]"/>
+        <value eval="{'name': 'New Lead', 'sequence': 1, 'fold': False, 'is_won': False, 'color': 1}"/>
+    </function>
+
+    <!-- 2. Requesting Info -->
+    <record id="stage_lead_request_details" model="crm.stage">
+        <field name="name">Requesting Info</field>
+        <field name="sequence">2</field>
+        <field name="color">2</field>
+    </record>
+
+    <!-- 3. Draft Quotation (reuse built-in stage_lead3) -->
+    <function model="crm.stage" name="write">
+        <value eval="[ref('crm.stage_lead3')]"/>
+        <value eval="{'name': 'Draft Quotation', 'sequence': 3, 'fold': False, 'is_won': False, 'color': 3}"/>
+    </function>
+
+    <!-- 4. Sent Quotation -->
+    <record id="stage_sent_quotation" model="crm.stage">
+        <field name="name">Sent Quotation</field>
+        <field name="sequence">4</field>
+        <field name="color">4</field>
+    </record>
+
+    <!-- 5. 1 Week No Response -->
+    <record id="stage_no_response" model="crm.stage">
+        <field name="name">1 Week No Response</field>
+        <field name="sequence">5</field>
+        <field name="color">5</field>
+    </record>
+
+    <!-- 6. Quotation Negotiation -->
+    <record id="stage_lead_negotiation" model="crm.stage">
+        <field name="name">Quotation Negotiation</field>
+        <field name="sequence">6</field>
+        <field name="color">6</field>
+    </record>
+
+    <!-- 7. Client Confirm Quotation (won stage) -->
+    <record id="stage_client_confirm" model="crm.stage">
+        <field name="name">Client Confirm Quotation</field>
+        <field name="sequence">7</field>
+        <field name="color">7</field>
+        <field name="is_won" eval="True"/>
+    </record>
+
+    <!-- 8. Internal Booking -->
+    <record id="stage_lead_cs_booking" model="crm.stage">
+        <field name="name">Internal Booking</field>
+        <field name="sequence">8</field>
+        <field name="color">8</field>
+    </record>
+
+    <!-- 9. Booking Carrier / Agent -->
+    <record id="stage_lead_cs_carriers" model="crm.stage">
+        <field name="name">Booking Carrier / Agent</field>
+        <field name="sequence">9</field>
+        <field name="color">9</field>
+    </record>
+
+    <!-- 10. Confirm Booking (reuse built-in stage_lead4 as won stage) -->
+    <function model="crm.stage" name="write">
+        <value eval="[ref('crm.stage_lead4')]"/>
+        <value eval="{'name': 'Confirm Booking', 'sequence': 10, 'fold': False, 'is_won': False, 'color': 10}"/>
+    </function>
+</odoo>

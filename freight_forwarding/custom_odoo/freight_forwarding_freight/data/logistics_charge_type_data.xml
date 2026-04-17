@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="charge_type_ocean_freight" model="logistics.charge.type">
+            <field name="name">Ocean Freight</field>
+            <field name="code">OCEAN_FREIGHT</field>
+            <field name="category">freight</field>
+        </record>
+        <record id="charge_type_air_freight" model="logistics.charge.type">
+            <field name="name">Air Freight</field>
+            <field name="code">AIR_FREIGHT</field>
+            <field name="category">freight</field>
+        </record>
+        <record id="charge_type_sea_freight" model="logistics.charge.type">
+            <field name="name">Sea Freight</field>
+            <field name="code">SEA_FREIGHT</field>
+            <field name="category">freight</field>
+        </record>
+        <record id="charge_type_lss" model="logistics.charge.type">
+            <field name="name">LSS</field>
+            <field name="code">LSS</field>
+            <field name="category">freight</field>
+        </record>
+        <record id="charge_type_thc" model="logistics.charge.type">
+            <field name="name">THC</field>
+            <field name="code">THC</field>
+            <field name="category">terminal</field>
+        </record>
+        <record id="charge_type_airport_terminal_charge" model="logistics.charge.type">
+            <field name="name">Airport Terminal Charge</field>
+            <field name="code">AIRPORT_TERMINAL</field>
+            <field name="category">terminal</field>
+        </record>
+        <record id="charge_type_lo_lo" model="logistics.charge.type">
+            <field name="name">Lo Lo</field>
+            <field name="code">LO_LO</field>
+            <field name="category">terminal</field>
+        </record>
+        <record id="charge_type_gate_charges" model="logistics.charge.type">
+            <field name="name">Gate Charges</field>
+            <field name="code">GATE_CHARGES</field>
+            <field name="category">terminal</field>
+        </record>
+        <record id="charge_type_documentation_fee" model="logistics.charge.type">
+            <field name="name">Documentation Fee</field>
+            <field name="code">DOC_FEE</field>
+            <field name="category">documentation</field>
+        </record>
+        <record id="charge_type_d_o_sea" model="logistics.charge.type">
+            <field name="name">D/O Sea</field>
+            <field name="code">DO_SEA</field>
+            <field name="category">documentation</field>
+        </record>
+        <record id="charge_type_presentation" model="logistics.charge.type">
+            <field name="name">Presentation</field>
+            <field name="code">PRESENTATION</field>
+            <field name="category">documentation</field>
+        </record>
+        <record id="charge_type_aes_eei_filing" model="logistics.charge.type">
+            <field name="name">AES/EEI Filing</field>
+            <field name="code">AES_EEI</field>
+            <field name="category">documentation</field>
+        </record>
+        <record id="charge_type_customs_clearance" model="logistics.charge.type">
+            <field name="name">Customs Clearance</field>
+            <field name="code">CUSTOMS_CLEARANCE</field>
+            <field name="category">customs</field>
+        </record>
+        <record id="charge_type_isps_port_security" model="logistics.charge.type">
+            <field name="name">ISPS Port Security</field>
+            <field name="code">ISPS</field>
+            <field name="category">customs</field>
+        </record>
+        <record id="charge_type_delivery_charge" model="logistics.charge.type">
+            <field name="name">Delivery Charge</field>
+            <field name="code">DELIVERY</field>
+            <field name="category">transport</field>
+        </record>
+        <record id="charge_type_trucking" model="logistics.charge.type">
+            <field name="name">Trucking</field>
+            <field name="code">TRUCKING</field>
+            <field name="category">transport</field>
+        </record>
+        <record id="charge_type_pick_up" model="logistics.charge.type">
+            <field name="name">Pick Up</field>
+            <field name="code">PICK_UP</field>
+            <field name="category">transport</field>
+        </record>
+        <record id="charge_type_handling_fee" model="logistics.charge.type">
+            <field name="name">Handling Fee</field>
+            <field name="code">HANDLING_FEE</field>
+            <field name="category">handling</field>
+        </record>
+        <record id="charge_type_cfs_fee" model="logistics.charge.type">
+            <field name="name">CFS Fee</field>
+            <field name="code">CFS_FEE</field>
+            <field name="category">handling</field>
+        </record>
+        <record id="charge_type_cic_fee" model="logistics.charge.type">
+            <field name="name">CIC Fee</field>
+            <field name="code">CIC</field>
+            <field name="category">surcharge</field>
+        </record>
+        <record id="charge_type_demurrage" model="logistics.charge.type">
+            <field name="name">Demurrage</field>
+            <field name="code">DEMURRAGE</field>
+            <field name="category">surcharge</field>
+        </record>
+        <record id="charge_type_miscellaneous" model="logistics.charge.type">
+            <field name="name">Miscellaneous</field>
+            <field name="code">MISC</field>
+            <field name="category">surcharge</field>
+        </record>
+        <record id="charge_type_x_ray" model="logistics.charge.type">
+            <field name="name">X-Ray</field>
+            <field name="code">XRAY</field>
+            <field name="category">surcharge</field>
+        </record>
+        <record id="charge_type_screening_charge" model="logistics.charge.type">
+            <field name="name">Screening Charge</field>
+            <field name="code">SCREENING</field>
+            <field name="category">surcharge</field>
+        </record>
+        <record id="charge_type_profit_share" model="logistics.charge.type">
+            <field name="name">Profit Share</field>
+            <field name="code">PROFIT_SHARE</field>
+            <field name="category">revenue_share</field>
+        </record>
+        <record id="charge_type_volume_share" model="logistics.charge.type">
+            <field name="name">Volume Share</field>
+            <field name="code">VOLUME_SHARE</field>
+            <field name="category">revenue_share</field>
+        </record>
+    </data>
+</odoo>

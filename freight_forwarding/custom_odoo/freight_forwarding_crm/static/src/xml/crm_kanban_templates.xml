@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Extends the base kanban template under a new name so only the CRM kanban uses it -->
+    <t t-name="freight_forwarding_crm.KanbanView" t-inherit="web.KanbanView" t-inherit-mode="primary">
+        <xpath expr="//button[hasclass('o-kanban-button-new')]" position="replace">
+            <button t-if="canCreate and props.showButtons" type="button"
+                    t-att-disabled="isNewButtonDisabled"
+                    class="btn btn-primary o-kanban-button-new"
+                    accesskey="c"
+                    t-on-click="() => this.createRecord()"
+                    data-bounce-button="">
+                New Lead
+            </button>
+        </xpath>
+    </t>
+
+    <!-- Extends the base list template under a new name so only the CRM list uses it -->
+    <t t-name="freight_forwarding_crm.ListView" t-inherit="web.ListView" t-inherit-mode="primary">
+        <xpath expr="//button[hasclass('o_list_button_add')]" position="replace">
+            <button t-if="!editedRecord and activeActions.create and props.showButtons"
+                    type="button"
+                    class="btn btn-primary o_list_button_add"
+                    data-hotkey="c"
+                    t-on-click="onClickCreate"
+                    data-bounce-button="">
+                New Lead
+            </button>
+        </xpath>
+    </t>
+</templates>

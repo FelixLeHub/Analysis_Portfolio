@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Stage 1: Prospect -->
+        <record id="crm_lead_a" model="crm.lead">
+            <field name="name">Lead A</field>
+            <field name="type">opportunity</field>
+            <field name="partner_name">ABC Logistics Co.</field>
+            <field name="freight_direction">export</field>
+            <field name="freight_service_type">fcl</field>
+            <field name="freight_pol">Ho Chi Minh</field>
+            <field name="freight_pod">Los Angeles</field>
+            <field name="expected_revenue">15000</field>
+            <field name="stage_id" ref="crm.stage_lead1"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="crm_lead_b" model="crm.lead">
+            <field name="name">Lead B</field>
+            <field name="type">opportunity</field>
+            <field name="partner_name">XYZ Trading Ltd.</field>
+            <field name="freight_direction">import</field>
+            <field name="freight_service_type">lcl</field>
+            <field name="freight_pol">Shanghai</field>
+            <field name="freight_pod">Hai Phong</field>
+            <field name="expected_revenue">8500</field>
+            <field name="stage_id" ref="crm.stage_lead1"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- Stage 2: Meeting -->
+        <record id="crm_lead_c" model="crm.lead">
+            <field name="name">Lead C</field>
+            <field name="type">opportunity</field>
+            <field name="partner_name">DEF Shipping Inc.</field>
+            <field name="freight_direction">export</field>
+            <field name="freight_service_type">air</field>
+            <field name="freight_pol">Da Nang</field>
+            <field name="freight_pod">Singapore</field>
+            <field name="expected_revenue">12000</field>
+            <field name="stage_id" ref="freight_forwarding_crm.stage_lead_request_details"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- Stage 3: Proposal -->
+        <record id="crm_lead_d" model="crm.lead">
+            <field name="name">Lead D</field>
+            <field name="type">opportunity</field>
+            <field name="partner_name">GHI Import Export</field>
+            <field name="freight_direction">export</field>
+            <field name="freight_service_type">fcl</field>
+            <field name="freight_pol">Hai Phong</field>
+            <field name="freight_pod">Rotterdam</field>
+            <field name="expected_revenue">22500</field>
+            <field name="stage_id" ref="crm.stage_lead3"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- Stage 4: Negotiation -->
+        <record id="crm_lead_e" model="crm.lead">
+            <field name="name">Lead E</field>
+            <field name="type">opportunity</field>
+            <field name="partner_name">JKL Global Trading</field>
+            <field name="freight_direction">import</field>
+            <field name="freight_service_type">fcl</field>
+            <field name="freight_pol">Busan</field>
+            <field name="freight_pod">Ho Chi Minh</field>
+            <field name="expected_revenue">18000</field>
+            <field name="stage_id" ref="freight_forwarding_crm.stage_lead_negotiation"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- Stage 5: Closed -->
+        <record id="crm_lead_f" model="crm.lead">
+            <field name="name">Lead F</field>
+            <field name="type">opportunity</field>
+            <field name="partner_name">MNO Freight Services</field>
+            <field name="freight_direction">export</field>
+            <field name="freight_service_type">lcl</field>
+            <field name="freight_pol">Ho Chi Minh</field>
+            <field name="freight_pod">Hamburg</field>
+            <field name="expected_revenue">9800</field>
+            <field name="stage_id" ref="crm.stage_lead4"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+    </data>
+</odoo>

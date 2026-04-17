@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_crm_lead_kanban_freight_forwarding_freight" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.freight_forwarding.freight</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="quick_create">0</attribute>
+            </xpath>
+            <xpath expr="//kanban" position="inside">
+                <field name="partner_id"/>
+                <field name="partner_name"/>
+                <field name="contact_name"/>
+                <field name="freight_direction_id"/>
+                <field name="freight_service_type_id"/>
+                <field name="freight_pol_id"/>
+                <field name="freight_pod_id"/>
+            </xpath>
+
+            <xpath expr="//t[@t-name='card']" position="replace">
+                <t t-name="card">
+                    <widget name="web_ribbon" id="lost_ribbon" title="Lost" bg_color="text-bg-danger" invisible="won_status != 'lost'"/>
+                    <widget name="web_ribbon" id="archived_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active or won_status in ['lost', 'won']"/>
+
+                    <div class="o_freight_forwarding_crm_freight_card">
+                        <div class="o_freight_forwarding_crm_freight_card_header">
+                            <field class="o_freight_forwarding_crm_freight_card_title" name="name"/>
+                        </div>
+
+                        <div class="o_freight_forwarding_crm_freight_card_body">
+                            <t t-set="customer_name" t-value="record.partner_id.value or record.partner_name.value or record.contact_name.value or ''"/>
+
+                            <div class="o_freight_forwarding_crm_freight_row" t-if="customer_name">
+                                <span class="o_freight_forwarding_crm_freight_label">Customer:</span>
+                                <span class="o_freight_forwarding_crm_freight_value" t-esc="customer_name"/>
+                            </div>
+
+                            <div class="o_freight_forwarding_crm_freight_row" t-if="record.freight_service_type_id.raw_value">
+                                <span class="o_freight_forwarding_crm_freight_label">Type:</span>
+                                <span class="o_freight_forwarding_crm_freight_value" t-esc="record.freight_service_type_id.value"/>
+                            </div>
+
+                            <div class="o_freight_forwarding_crm_freight_row" t-if="record.freight_pol_id.raw_value">
+                                <span class="o_freight_forwarding_crm_freight_label">POL:</span>
+                                <span class="o_freight_forwarding_crm_freight_value" t-esc="record.freight_pol_id.value"/>
+                            </div>
+
+                            <div class="o_freight_forwarding_crm_freight_row" t-if="record.freight_pod_id.raw_value">
+                                <span class="o_freight_forwarding_crm_freight_label">POD:</span>
+                                <span class="o_freight_forwarding_crm_freight_value" t-esc="record.freight_pod_id.value"/>
+                            </div>
+
+                            <div class="o_freight_forwarding_crm_freight_row o_freight_forwarding_crm_freight_row_revenue o_kanban_card_crm_lead_revenue">
+                                <span class="o_freight_forwarding_crm_freight_label">Revenue:</span>
+                                <field name="expected_revenue" widget="monetary" options="{'currency_field': 'company_currency'}" class="o_freight_forwarding_crm_freight_revenue"/>
+                            </div>
+                        </div>
+
+                        <footer class="o_freight_forwarding_crm_freight_card_footer">
+                            <div class="d-flex align-items-center">
+                                <field name="priority" widget="priority" groups="base.group_user" class="me-2"/>
+                                <field name="activity_ids" widget="kanban_activity"/>
+                            </div>
+                            <div class="ms-auto d-flex align-items-center">
+                                <field name="user_id" widget="many2one_avatar_user" domain="[('share', '=', False)]"/>
+                            </div>
+                        </footer>
+                    </div>
+                </t>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_form_freight_forwarding_freight" model="ir.ui.view">
+        <field name="name">crm.lead.form.freight_forwarding.freight</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Hide the statusbar pipeline from header -->
+            <xpath expr="//header/field[@name='stage_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- Add Email button before Won -->
+            <xpath expr="//header/button[@name='action_set_won_rainbowman']" position="before">
+                <button name="action_send_lead_email" string="Email" type="object"
+                        class="oe_highlight" data-hotkey="m" icon="fa-envelope"
+                        invisible="not active"/>
+            </xpath>
+            <!-- Hide Convert to Opportunity button -->
+            <xpath expr="//header/button[@name='%(crm.action_crm_lead2opportunity_partner)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- Hide Enrich buttons (from crm_iap_enrich) -->
+            <xpath expr="//header/button[@name='iap_enrich'][1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='iap_enrich'][2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet" position="replace">
+                <sheet>
+                    <!-- Preserve invisible fields needed by other inherited views -->
+                    <field name="active" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="is_rotting" invisible="1"/>
+                    <field name="rotting_days" invisible="1"/>
+                    <field name="meeting_display_label" invisible="1"/>
+                    <field name="meeting_display_date" invisible="1"/>
+                    <field name="duplicate_lead_count" invisible="1"/>
+                    <field name="won_status" invisible="1"/>
+                    <field name="previous_freight_currency_id" invisible="1"/>
+
+                    <!-- Button box: keeps stat buttons from other modules working -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_schedule_meeting" type="object"
+                                class="oe_stat_button" icon="fa-calendar"
+                                context="{'partner_id': partner_id}"
+                                invisible="not id or type == 'lead'">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text"><field name="meeting_display_label"/></span>
+                                <field name="meeting_display_date" class="o_stat_value" invisible="not meeting_display_date"/>
+                            </div>
+                        </button>
+                        <button name="action_view_freight_jobs" type="object"
+                                class="oe_stat_button" icon="fa-ship"
+                                invisible="not id">
+                            <field name="freight_job_count" widget="statinfo" string="Freight Jobs"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active or won_status in ['lost', 'won']"/>
+                    <widget name="web_ribbon" title="Lost" bg_color="text-bg-danger" invisible="won_status != 'lost'"/>
+
+                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-3">
+                        <div class="oe_title">
+                            <h1><field name="name" placeholder="Lead Name"/></h1>
+                            <div class="text-muted small">Lead ID: <field name="id" readonly="1"/></div>
+                        </div>
+                        <div class="d-flex flex-column gap-2 mt-1">
+                            <div class="d-flex align-items-center gap-2">
+                                <label for="freight_currency_id" string="Currency:" class="fw-bold text-nowrap mb-0"/>
+                                <field name="freight_currency_id" options="{'no_create': True, 'no_open': True}" class="w-auto"/>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <label for="stage_id" string="Stage:" class="fw-bold text-nowrap mb-0"/>
+                                <field name="stage_id" widget="selection" options="{'no_create': True}" class="w-auto"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected Revenue + Native AI Probability -->
+                    <div class="o_row mb-3 d-flex align-items-start gap-4 flex-wrap">
+                        <group class="flex-grow-1 mb-0">
+                            <field name="expected_revenue" widget="monetary"
+                                   options="{'currency_field': 'freight_currency_id'}"
+                                   string="Expected Revenue"/>
+                        </group>
+                        <div class="col-auto">
+                            <field name="is_automated_probability" invisible="1"/>
+                            <label for="automated_probability" string="AI Probability" class="d-inline-block fw-bold"/>
+                            <a class="border-0 mx-1 p-0 mb-1 btn btn-light"
+                               name="action_set_automated_probability"
+                               role="button" type="object"
+                               invisible="is_automated_probability or won_status == 'lost'">
+                                <img class="m-1 o_lead_opportunity_form_AI_switch_img"
+                                     title="Switch to AI-computed probabilities"
+                                     aria-label="Switch to AI-computed probabilities"
+                                     src="/crm/static/src/img/pls-tooltip-ai-icon.png"
+                                     alt="AI"/>
+                            </a>
+                            <widget name="pls_tooltip_button" class="d-inline-block"
+                                    invisible="won_status != 'pending' or not is_automated_probability"/>
+                            <div class="d-flex align-items-baseline">
+                                <field name="probability" invisible="1" force_save="1"/>
+                                <field name="automated_probability" widget="float"
+                                       class="oe_inline o_input_6ch" readonly="1" force_save="1"/>
+                                <span class="opacity-50 p-2"> %</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipment Details | Client Details -->
+                    <group>
+                        <group string="Shipment Details">
+                            <field name="freight_incoterm" string="Incoterm"/>
+                            <field name="freight_direction_id" string="Direction"/>
+                            <field name="freight_pol_id" string="POL"/>
+                            <field name="freight_pod_id" string="POD"/>
+                        </group>
+                        <group string="Client Details">
+                            <field name="partner_id" string="Customer Name"
+                                   options="{'no_create_edit': True}"/>
+                            <field name="email_from" string="Email"/>
+                            <field name="phone"/>
+                            <field name="freight_point_of_request" string="Point of Request"/>
+                            <field name="create_date" string="Created Date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- Cargo Details: both columns under one heading -->
+                    <group string="Cargo Details">
+                        <group>
+                            <field name="freight_weight" string="Gross Weight (KGS)"/>
+                            <field name="freight_volume" string="Volume (CBM)"/>
+                            <field name="freight_commodity" string="Commodity"/>
+                        </group>
+                        <group>
+                            <field name="freight_pallets" string="Pallets"/>
+                            <field name="freight_cargo" string="Cargo"/>
+                            <field name="freight_dimension" string="Dimension"/>
+                        </group>
+                    </group>
+
+                    <!-- Quotations -->
+                    <field name="lead_quotation_ids" mode="list">
+                        <list string="Quotations" create="0" delete="0">
+                            <field name="name" string="Quotation ID"/>
+                            <field name="create_date" string="Date Created"/>
+                            <field name="amount_total_lead_currency" string="Total Charges" widget="monetary"/>
+                            <field name="state" string="Status" widget="badge"
+                                   decoration-info="state == 'draft'"
+                                   decoration-warning="state == 'sent'"
+                                   decoration-success="state == 'confirmed'"
+                                   decoration-danger="state == 'cancelled'"/>
+                            <field name="currency_id" column_invisible="1"/>
+                            <field name="lead_freight_currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_tree_freight_forwarding_freight" model="ir.ui.view">
+        <field name="name">crm.lead.tree.freight_forwarding.freight</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="freight_direction_id" optional="show"/>
+                <field name="freight_service_type_id" optional="show"/>
+                <field name="freight_pol_id" optional="show"/>
+                <field name="freight_pod_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_search_freight_forwarding_freight" model="ir.ui.view">
+        <field name="name">crm.lead.search.freight_forwarding.freight</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <field name="freight_direction_id"/>
+                <field name="freight_service_type_id"/>
+                <field name="freight_pol_id"/>
+                <field name="freight_pod_id"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='open_opportunities']" position="after">
+                <filter string="Export" name="freight_forwarding_freight_export" domain="[('freight_direction', '=', 'export')]"/>
+                <filter string="Import" name="freight_forwarding_freight_import" domain="[('freight_direction', '=', 'import')]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='stage']" position="after">
+                <filter string="Direction" name="group_by_freight_direction" context="{'group_by': 'freight_direction'}"/>
+                <filter string="Service Type" name="group_by_freight_service_type" context="{'group_by': 'freight_service_type'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Hide Generate Leads button from kanban -->
+    <record id="view_crm_lead_kanban_hide_generate" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.hide.generate.freight_forwarding</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm_iap_mine.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[hasclass('o_button_generate_leads')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Hide Generate Leads button from list view -->
+    <record id="view_crm_lead_list_hide_generate" model="ir.ui.view">
+        <field name="name">crm.lead.list.hide.generate.freight_forwarding</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm_iap_mine.crm_lead_view_tree_opportunity"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[hasclass('o_button_generate_leads')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Keep kanban as default, list view uses custom crm_lead_list type for "New Lead" label -->
+    <record id="crm.crm_lead_action_pipeline" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,graph,pivot,calendar,activity</field>
+        <field name="context">{'search_default_my_pipeline': 1, 'default_type': 'opportunity', 'group_by': ['stage_id']}</field>
+    </record>
+</odoo>

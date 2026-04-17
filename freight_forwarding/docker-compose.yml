@@ -1,0 +1,35 @@
+services:
+  web:
+    image: odoo:19.0
+    depends_on:
+      - db
+    command:
+      - -d
+      - freight_forwarding
+      - --db-filter=^freight_forwarding$
+      - --no-database-list
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
+      - ./addons:/mnt/extra-addons
+      - ./custom_odoo:/mnt/custom-addons
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: freight_forwarding
+      POSTGRES_USER: freight_forwarding_user
+      POSTGRES_PASSWORD: freight_forwarding_pass_2026
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+
+volumes:
+  odoo-web-data:
+    name: freight_forwarding_odoo-web-data
+  db-data:
+    name: freight_forwarding_db-data

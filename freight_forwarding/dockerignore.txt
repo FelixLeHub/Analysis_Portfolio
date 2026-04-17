@@ -1,0 +1,5 @@
+odoo/.git
+odoo/venv
+odoo/doc
+odoo/debian
+custom_odoo/.git

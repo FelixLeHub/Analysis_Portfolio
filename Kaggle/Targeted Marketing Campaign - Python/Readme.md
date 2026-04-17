@@ -6,7 +6,7 @@
 
 **Code:** [Customer_Segmentation.ipynb](Customer_Segmentation.ipynb)
 
-**Dataset:** [Mall_Customers.csv]([Mall_Customers.csv](https://github.com/FelixLeHub/Felix-s-Portfolio/blob/a25ebe793f431cca80eb68aaaa9f1819847959c8/Kaggle/Targeted%20Marketing%20Campaign%20-%20Python/Dataset/Mall_Customers.csv))
+**Dataset:** [Mall_Customers.csv](https://github.com/FelixLeHub/Felix-s-Portfolio/blob/a25ebe793f431cca80eb68aaaa9f1819847959c8/Kaggle/Targeted%20Marketing%20Campaign%20-%20Python/Dataset/Mall_Customers.csv)
 
 **Description:** The project focused on analyzing a dataset of mall customers. The dataset contains columns for CustomerID, Gender, Age, Annual Income, and Spending Score. This project involved loading the CSV file in Python to perform exploratory data analysis (EDA) using histograms, KDE plots, box plots, and scatter plots. Then, using KMean algorithm, I perform cluster analysis for univariate, bivariate, and multivariate variables to complete the objective. Creating summary statistics and visuals to identify the details of each cluster.
 

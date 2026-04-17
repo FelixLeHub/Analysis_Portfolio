@@ -9,7 +9,7 @@
 - Dashboard: [Hotel_Revenue_Dashboards.pbix](Hotel_Revenue_Dashboards.pbix)
 - Dashboard Picture: [HotelRevenue_Dashboard.png](HotelRevenue_Dashboard.png)
 
-**Dataset:** [Revenue_History.xlsx]()
+**Dataset:** [Revenue_History.xlsx](https://github.com/FelixLeHub/Analysis_Portfolio/blob/9665fc934f572b4faa1e2b4ec7253a590e800ed0/Kaggle/Power%20BI%20Hotel%20Revenue%20Dashboard/Dataset/Revenue_History.xlsx)
 
 **Description:** This project is focused on analyzing and visualizing a dataset of hotel revenue over the years. It involved importing the dataset into Microsoft SQL Server Management Studio to create the data warehouse that I would link to Power BI. With Power BI, I created dashboards that tell the story of the hotel's revenue over the years.
 
